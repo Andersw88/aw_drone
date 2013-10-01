@@ -1,0 +1,9 @@
+drones: ['drone1','drone2','drone3','drone4','drone5','drone6']
+
+aw:
+  map_name: midroom
+  live: false
+  drone_rad: 0.5
+  goal_tolerance: 0.5
+  multiplanner_vis: false
+  multiplanner_map_scale: 10

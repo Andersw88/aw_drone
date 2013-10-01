@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="name" default="quadrotor"/>
+  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro"/>
+  <arg name="tf_prefix" default="$(arg name)"/>
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.5"/>
+
+  <group ns="$(arg name)">
+  <!-- send the robot XML to param server -->
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(arg model)'" />
+  <param name="tf_prefix" type="string" value="$(arg tf_prefix)" />
+
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description
+              -urdf
+              -x $(arg x)
+              -y $(arg y)
+              -z $(arg z)
+              -model $(arg name)"
+        respawn="false"/>
+
+  <!-- start robot state publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" >
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" value="$(arg tf_prefix)"/>
+  </node>
+
+  <arg name="use_ground_truth_for_tf" default="true" />
+  <node name="ground_truth_to_tf" pkg="message_to_tf" type="message_to_tf" >
+    <param name="odometry_topic" value="ground_truth/state" />
+    <param name="frame_id" value="odom" />
+    <param name="tf_prefix" value="$(arg tf_prefix)/ground_truth" unless="$(arg use_ground_truth_for_tf)" />
+  </node>
+  <node name="state_to_tf" pkg="message_to_tf" type="message_to_tf"  unless="$(arg use_ground_truth_for_tf)">
+    <param name="odometry_topic" value="state" />
+    <param name="frame_id" value="odom" />
+  </node>
+
+  <include file="$(find aw_move_base)/launch/aw_move_base.launch"/>
+
+
+  <node name="fake_localization" pkg="fake_localization" type="fake_localization">
+    <remap from="base_pose_ground_truth" to="ground_truth/state"/>
+    <param name="odom_frame_id" value="$(arg tf_prefix)/odom" />
+    <param name="global_frame_id" value="map" />
+    <param name="base_frame_id" value="$(arg tf_prefix)/base_link" />
+  </node>
+
+  <!-- <node name="drone_autopilot" pkg="tum_ardrone" type="drone_autopilot" output="screen"/> -->
+  <node name="aw_2d_nav" pkg="aw_2d_nav" type="aw_2d_nav" output="screen"/>
+
+   </group>
+</launch>

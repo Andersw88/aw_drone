@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <rosparam param="drones">['drone1']</rosparam>
+
+  <include file="$(find aw_hector_quadrotor)/launch/city.launch"/>
+  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
+
+  <arg name="d1" value="drone1"/>
+  <group ns="$(arg d1)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d1)" />
+      <arg name="tf_prefix" value="$(arg d1)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="-10.0" />
+      <arg name="y" value="1.0" />
+    </include>
+  </group>
+
+
+</launch>

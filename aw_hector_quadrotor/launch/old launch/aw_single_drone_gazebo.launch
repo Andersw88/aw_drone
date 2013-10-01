@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="false"/>
+    <!-- <arg name="paused" value="true"/> -->
+  </include>
+
+  <!-- <arg name="model" default="$(find aw_hector_quadrotor)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro" /> -->
+  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
+  <arg name="d1" value="drone"/>
+
+  <!-- <group ns="$(arg d1)"> -->
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="$(arg d1)" />
+    <arg name="tf_prefix" value="" />
+    <arg name="model" value="$(arg model)" />
+    <arg name="y" value="-1.0" />
+  </include>
+  <node name="rviz" pkg="rviz" type="rviz"/>
+  <!-- </group> -->
+
+</launch>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+  <node name="aw_task_deligator" pkg="aw_task_deligator" type="aw_task_deligator">
+    <rosparam param="drones">['drone1','drone2']</rosparam>
+    <rosparam command="load" file="$(find aw_task_deligator)/goals/cityGoals.yaml" />
+  </node>
+</launch>

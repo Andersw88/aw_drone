@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6']</rosparam> -->
+  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze1.yaml" />
+  
+  <include file="$(find aw_hector_quadrotor)/launch/maze1_map.launch"/>
+   <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
+
+  <arg name="d1" value="drone1"/>
+  <group ns="$(arg d1)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d1)" />
+      <arg name="tf_prefix" value="$(arg d1)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="1.0" />
+      <arg name="y" value="1.0" />
+      
+    </include>
+  </group>
+
+  <arg name="d2" value="drone2"/>
+  <group ns="$(arg d2)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d2)" />
+      <arg name="tf_prefix" value="$(arg d2)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="2.0" />
+      <arg name="y" value="1.0" />
+      
+    </include>
+  </group>
+
+  <arg name="d3" value="drone3"/>
+  <group ns="$(arg d3)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d3)" />
+      <arg name="tf_prefix" value="$(arg d3)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="3.0" />
+      <arg name="y" value="1.0" />
+      
+    </include>
+  </group>
+
+ <arg name="d4" value="drone4"/>
+  <group ns="$(arg d4)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d4)" />
+      <arg name="tf_prefix" value="$(arg d4)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="4.0" />
+      <arg name="y" value="1.0" />
+    </include>
+  </group>
+
+ <arg name="d5" value="drone5"/>
+  <group ns="$(arg d5)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d5)" />
+      <arg name="tf_prefix" value="$(arg d5)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="1.5" />
+      <arg name="y" value="14.5" />
+    </include>
+  </group>
+
+ <arg name="d6" value="drone6"/>
+  <group ns="$(arg d6)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg d6)" />
+      <arg name="tf_prefix" value="$(arg d6)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="2.5" />
+      <arg name="y" value="14.5" />
+    </include>
+  </group>
+
+</launch>

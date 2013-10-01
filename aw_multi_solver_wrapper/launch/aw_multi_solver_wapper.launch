@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<launch>
+  <node name="aw_multi_solver_wrapper" type="aw_multi_service.py" pkg="aw_multi_solver_wrapper" output="screen"/>
+</launch>

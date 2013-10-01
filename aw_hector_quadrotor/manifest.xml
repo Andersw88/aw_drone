@@ -1,0 +1,14 @@
+<package>
+  <description brief="aw_hector_quadrotor">
+
+     aw_hector_quadrotor
+
+  </description>
+  <author>Anders</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/aw_hector_quadrotor</url>
+
+</package>
+
+

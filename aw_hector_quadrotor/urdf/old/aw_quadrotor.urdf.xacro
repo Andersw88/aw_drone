@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<robot name="quadrotor" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Included URDF Files -->
+  <xacro:include filename="$(find aw_hector_quadrotor)/urdf/aw_quadrotor_base.urdf.xacro" />
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+  <xacro:include filename="$(find hector_sensors_description)/urdf/hokuyo_utm30lx.urdf.xacro" />
+  <xacro:include filename="$(find aw_hector_quadrotor)/urdf/aw_quadrotor_plugins.gazebo.xacro" />
+  
+  <xacro:quadrotor_base_macro prefix="${drone_name}"/>
+  <xacro:quadrotor_sensors_gazebo prefix="${drone_name}"/>
+  <xacro:hokuyo_utm30lx name="${drone_name}/laser" parent="${drone_name}/base_link" ros_topic="laser_scan"
+                        update_rate="40" ray_count="1081" min_angle="-135" max_angle="135">
+    <origin xyz="0.0 0.0 -0.097" rpy="${M_PI} 0 0"/>
+  </xacro:hokuyo_utm30lx>
+  <xacro:quadrotor_sensors/>
+  <xacro:quadrotor_simple_controller prefix="${drone_name}" state_topic="ground_truth/state" imu_topic="raw_imu"/>
+
+
+
+</robot>

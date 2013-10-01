@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
+
+  <arg name="drone_name" default="drone1"/>
+  <arg name="drone_x" default="1.0" />
+  <arg name="drone_y" default="1.0" />
+
+  <group ns="$(arg drone_name)">
+    <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+      <arg name="name" value="$(arg drone_name)" />
+      <arg name="tf_prefix" value="$(arg drone_name)" />
+      <arg name="model" value="$(arg model)" />
+      <arg name="x" value="$(arg drone_x)" />
+      <arg name="y" value="$(arg drone_y)" />
+    </include>
+  </group>
+</launch>

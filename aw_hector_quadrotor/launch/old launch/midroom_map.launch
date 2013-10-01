@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find aw_move_base)/maps/midroom.yaml"/>
+  <rosparam command="load" file="$(find aw_task_deligator)/goals/midroomGoals.yaml" />
+  <param name="aw/map_name" value="midroom" />
+  <include file="$(find aw_hector_quadrotor)/launch/common.launch" />
+</launch>

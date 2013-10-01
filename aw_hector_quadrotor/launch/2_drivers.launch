@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- This is a sample lanuch file, please change it based on your needs -->
+<launch>
+
+  <group ns="drone1">
+    <include file="$(find aw_hector_quadrotor)/launch/ardrone_driver.launch">
+      <arg name="tf_prefix" value="drone1"/>
+      <arg name="ip_adress" value="192.168.1.1"/>
+    </include>
+  </group>
+
+  <group ns="drone2">
+    <include file="$(find aw_hector_quadrotor)/launch/ardrone_driver.launch">
+      <arg name="tf_prefix" value="drone3"/>
+      <arg name="ip_adress" value="192.168.1.3"/>
+    </include>
+  </group>
+</launch>
+
