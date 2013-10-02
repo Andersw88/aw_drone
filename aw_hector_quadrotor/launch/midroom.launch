@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-  <!-- <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6']</rosparam> -->
+
+  <arg name="tgm" default="0"/>
+  <param name="aw/goal_deligator_mode" type="int" value="$(arg tgm)"/>
   <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/midroom.yaml" />
 
   <include file="$(find aw_hector_quadrotor)/launch/map.launch">
@@ -15,32 +17,32 @@
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone2" />
-      <arg name="x" value="10.0" />
-      <arg name="y" value="5.0" />
+    <arg name="x" value="10.0" />
+    <arg name="y" value="5.0" />
   </include>
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone3" />
-      <arg name="x" value="10.0" />
-      <arg name="y" value="45.0" />
+    <arg name="x" value="10.0" />
+    <arg name="y" value="45.0" />
   </include>
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone4" />
-      <arg name="x" value="5.0" />
-      <arg name="y" value="45.0" />
+    <arg name="x" value="5.0" />
+    <arg name="y" value="45.0" />
   </include>
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone5" />
-      <arg name="x" value="5.0" />
-      <arg name="y" value="43.0" />
+    <arg name="x" value="5.0" />
+    <arg name="y" value="43.0" />
   </include>
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone6" />
-      <arg name="x" value="5.0" />
-      <arg name="y" value="7.0" />
+    <arg name="x" value="5.0" />
+    <arg name="y" value="7.0" />
   </include>
 
 </launch>

@@ -1,9 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-  <!-- <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6']</rosparam> -->
+  <arg name="tgm" default="0"/>
+  <param name="aw/goal_deligator_mode" type="int" value="$(arg tgm)"/>
+
   <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze1.yaml" />
 
- <include file="$(find aw_hector_quadrotor)/launch/map.launch">
+  <include file="$(find aw_hector_quadrotor)/launch/map.launch">
     <arg name="map_name" value="maze1" />
   </include>
   <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />

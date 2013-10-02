@@ -28,6 +28,7 @@ class TaskPlayer():
 			
 		droneNames = []
 		droneNames = rospy.get_param('drones', droneNames)
+		self.goalTolerance_ = rospy.get_param('aw/goal_tolerance', droneNames)
 		self.drones_ = [{} for _ in range(0,len(droneNames))]
 
 		for i in range(0,len(droneNames)):
@@ -113,9 +114,8 @@ class TaskPlayer():
 			#drone['referenceSet'] = True
 			
 		if(((drone['currentGoal'][0] - drone['position'][0])**2 + 
-			(drone['currentGoal'][1] - drone['position'][1])**2)**0.5  < 0.5 and not drone['nextPoseReached']):
+			(drone['currentGoal'][1] - drone['position'][1])**2)**0.5  < self.goalTolerance_ and not drone['nextPoseReached']):
 			rospy.logdebug(drone['name'] + " reached step %f %f,timestep: %i" %(drone['currentGoal'][0],drone['currentGoal'][1],self.timeSteps[self.currentTimeStepIndex]))
-
 
 			drone['nextPoseReached'] = True
 	
