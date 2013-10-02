@@ -15,7 +15,6 @@ Panels:
         - /drone61/Path1
         - /drone71/Path1
         - /drone71/RobotModel1
-        - /drone81
         - /drone81/Path1
         - /drone81/RobotModel1
       Splitter Ratio: 0.5
@@ -46,7 +45,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 160; 160; 164
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.03
         Value: Lines
@@ -59,7 +58,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Class: rviz/TF
       Enabled: false
       Frame Timeout: 15
@@ -520,5 +519,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1248
-  X: 652
+  X: 645
   Y: 24

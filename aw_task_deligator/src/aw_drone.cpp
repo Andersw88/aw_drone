@@ -58,7 +58,7 @@ bool Drone::isFree()
 //     } else {
 //         ROS_INFO ( "%s doesn't have a position" ,name_.c_str() );
 //     }
-    ROS_INFO ( "%s state: hasPosition_:%s  hasGoal_:%s goalIsPublished_:%s",
+    ROS_DEBUG ( "%s state: hasPosition_:%s  hasGoal_:%s goalIsPublished_:%s",
                name_.c_str(),
                hasPosition_ ? "true":"false",
                hasGoal_ ? "true":"false",
@@ -68,7 +68,7 @@ bool Drone::isFree()
 }
 bool Drone::hasGoalAndPos()
 {
-    ROS_INFO ( "%s state: hasPosition_:%s  hasGoal_:%s goalIsPublished_:%s",
+    ROS_DEBUG ( "%s state: hasPosition_:%s  hasGoal_:%s goalIsPublished_:%s",
                name_.c_str(),
                hasPosition_ ? "true":"false",
                hasGoal_ ? "true":"false",

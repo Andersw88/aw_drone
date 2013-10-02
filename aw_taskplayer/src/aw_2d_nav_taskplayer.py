@@ -14,7 +14,7 @@ from std_msgs.msg import Header
 import tf
 from pprint import pprint
 from aw_multi_solver_wrapper.srv import *
-import os
+import os,subprocess
 
 class TaskPlayer():
     
@@ -29,6 +29,7 @@ class TaskPlayer():
 		droneNames = []
 		droneNames = rospy.get_param('drones', droneNames)
 		self.goalTolerance_ = rospy.get_param('aw/goal_tolerance', droneNames)
+		multiPlannerMapScale = float(rospy.get_param('aw/multiplanner/map_scale', 10.0))
 		self.drones_ = [{} for _ in range(0,len(droneNames))]
 
 		for i in range(0,len(droneNames)):
@@ -49,7 +50,7 @@ class TaskPlayer():
 		self.timeSteps = list(set([int(x[0]) for sublist in[[[j[0]] for j in i] for i in spaceSeperatedPaths] for x in sublist]))
 		self.timeSteps.sort()
 		#print self.timeSteps
-		dictsWithPositions = [{int(j[0]):[float(j[1])/10.0,float(j[2])/10.0] for j in i} for i in spaceSeperatedPaths]
+		dictsWithPositions = [{int(j[0]):[float(j[1])/multiPlannerMapScale,float(j[2])/multiPlannerMapScale] for j in i} for i in spaceSeperatedPaths]
 		
 		#pprint (lineSeperatedPaths)
 		#pprint (commaSeperatedPaths)
@@ -66,6 +67,10 @@ class TaskPlayer():
 			drone['referenceSet'] = False
 			drone['currentGoal'] = drone['path'][0]
 			drone['poseSub'] = rospy.Subscriber(drone['name'] + '/ground_truth/state', Odometry, self.poseSubscribers_rospy, drone)
+			
+			
+			process = subprocess.Popen(["rosnode kill %s/move_base"%(drone['name'],)],stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
+			stdout, stderr = process.communicate()
 			#drone['commmadPub'] = rospy.Publisher(drone['name'] + '/tum_ardrone/com', String)
 
 			
@@ -90,13 +95,17 @@ class TaskPlayer():
 		
 	def update(self):
 		#rospy.loginfo("update called")
+		if(self.currentTimeStepIndex == 0):
+			self.start_time = rospy.get_rostime()
+			print "Start time:", self.start_time.secs
 
 		if(all(i['nextPoseReached'] for i in self.drones_)):
 			self.currentTimeStepIndex += 1
 			if(self.currentTimeStepIndex >= len(self.timeSteps)):
 				#if(self.isLive):
 					
-				rospy.logdebug("TaskPlayer is now finnished")
+				rospy.loginfo("TaskPlayer is now finnished, time since start %s" %((rospy.get_rostime() - self.start_time).secs,))
+				rospy.signal_shutdown("Finnished")
 				return
 			
 			for drone in self.drones_:
@@ -126,6 +135,8 @@ class TaskPlayer():
 			path.header.frame_id = "map"
 			path.poses = [ PoseStamped(header = Header(seq=i,frame_id="map"),pose=Pose(position=Point(x=drone['path'][key][0],y=drone['path'][key][1]),orientation=q)) for i,key in enumerate(sorted(drone['path']))]
 			drone['pathPub'].publish(path)
+			#subprocess.Popen(list(args), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 		
 		
 		
@@ -160,5 +171,5 @@ if __name__ == '__main__':
 	while not rospy.is_shutdown():
 		taskPlayer.update()
 		#taskPlayer.publishDronePaths()
-		rospy.sleep(0.2)
+		rospy.sleep(0.1)
         

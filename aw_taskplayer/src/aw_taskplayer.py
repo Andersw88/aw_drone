@@ -7,7 +7,7 @@ from geometry_msgs.msg import Point
 from std_msgs.msg import String
 import tf
 from pprint import pprint
-import os
+import os,subprocess,sys
 
 #class Drone():
 	#self.name

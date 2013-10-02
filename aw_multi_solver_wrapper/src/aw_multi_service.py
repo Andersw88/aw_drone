@@ -9,11 +9,12 @@ from pprint import pprint
 from aw_multi_solver_wrapper.srv import *
 from aw_task_deligator.srv import *
 
-def wrapper(args):
-    process = subprocess.Popen(list(args), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = process.communicate()
-    print stderr
-    return stdout, stderr
+#def wrapper(args):
+    #process = subprocess.Popen(list(args), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #stdout, stderr = process.communicate()
+    #if(stdrr != ''):
+		#print stderr
+    #return stdout, stderr
     
 class SolverWrapper():
 

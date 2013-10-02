@@ -6,7 +6,7 @@ http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
 
 Run catkin_make in the root of your catkin workspace
 
-Use "roslaunch aw_hector_quadrotor maze2.launch" to run.
+Use "roslaunch aw_hector_quadrotor maze2.launch tgm:=2" to run. where tgm can be 0-2
 
 some run configuration can be found in:
 aw_hector_quadrotor/cfg/

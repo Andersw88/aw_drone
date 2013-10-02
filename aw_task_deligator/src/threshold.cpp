@@ -156,7 +156,7 @@ void ThresholdAlgorithm::setMatixINFINITYAboveThreshold(double threshold, Matrix
 	for ( int row = 0 ; row < m.rows() ; row++ ){
 		for ( int col = 0 ; col < m.columns() ; col++ ){
 			if(m(row,col) > threshold)
-				m(row,col) = 2000;
+				m(row,col) = 99999;
 		}
 	}
 }
