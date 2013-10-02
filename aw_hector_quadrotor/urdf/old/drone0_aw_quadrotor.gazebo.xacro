@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-
-<robot name="quadrotor" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:property name="drone_name" value="drone0" />
-  <xacro:include filename="$(find aw_hector_quadrotor)/urdf/aw_quadrotor.urdf.xacro" />
-
-</robot>
-

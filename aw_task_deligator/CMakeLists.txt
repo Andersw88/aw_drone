@@ -22,7 +22,8 @@ add_executable(aw_task_deligator
   src/aw_task_deligator.cpp 
   src/munkres-cpp/munkres.cpp
   src/TaskDeligator.cpp
-  src/aw_drone.cpp)
+  src/aw_drone.cpp
+  src/threshold.cpp)
 
 catkin_package(
 )

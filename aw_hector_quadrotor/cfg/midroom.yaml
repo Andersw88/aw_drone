@@ -5,5 +5,9 @@ aw:
   live: false
   drone_rad: 0.5
   goal_tolerance: 0.5
-  multiplanner_vis: false
-  multiplanner_map_scale: 10
+  goal_deligator_mode: 2
+  multiplanner:
+    vis: false
+    map_scale: 10
+    maxtime: 2000
+    grid_step: 10

@@ -149,6 +149,99 @@ bool HungarianTask::allocTasksToDrones()
     return true;
 }
 
+ThresholdPlusHungarianTask::ThresholdPlusHungarianTask ( std::vector<boost::shared_ptr<Drone> > drones,std::vector<std::pair<double,double> > tasks ) : TaskDeligator ( drones,tasks ) {}
+
+bool ThresholdPlusHungarianTask::allocTasksToDrones()
+{
+    int nrDrones = drones_.size();
+    int nrTasks = tasks_.size();
+    if ( nrTasks == 0 ) {
+        ROS_DEBUG ( "Already done,all tasks are have been completed" );
+        return false;
+    }
+
+    for ( int i = 0; i<nrDrones; ++i ) {
+        if ( !drones_[i]->isFree() ) {
+            ROS_DEBUG ( "Drone:%d is busy",i+1 );
+            return false;
+        }
+    }
+
+    std::vector<std::vector<double> >  distances ( nrDrones,std::vector<double> ( nrTasks ) );
+    ROS_INFO ( "Running task deligation with %d drones and %d tasks Step 1",nrDrones,nrTasks );
+    for ( int i = 0; i<nrDrones; ++i ) {
+
+//         if ( !drones_[i]->calcEuclidianGoalDistances ( tasks_,distances[i] ) ) {
+//             ROS_INFO ( "Drone:%d can not provide distances",i+1 );
+//             return false;
+//         }
+        if ( !drones_[i]->getMove_baseDistances ( tasks_,distances[i] ) ) {
+            ROS_INFO ( "Drone:%d can not provide distances",i+1 );
+            return false;
+        }
+    }
+
+
+    Matrix<double> distancesMatrix ( nrDrones,nrTasks );
+
+    for ( int i = 0; i < nrDrones; ++i ) {
+        for ( int j = 0; j < nrTasks; ++j ) {
+            distancesMatrix ( i,j ) = distances[i][j];
+        }
+    }
+
+    std::stringstream ss;
+    ss.precision ( 0 );
+    ss << "Resulting matrix:";
+    for ( int row = 0 ; row < nrDrones ; row++ ) {
+        ss << std::endl;
+        for ( int col = 0 ; col < nrTasks ; col++ ) {
+            ss.width ( 5 );
+            ss << std::fixed << distancesMatrix ( row,col ) << ",";
+        }
+    }
+    ss << std::endl;
+	ThresholdAlgorithm ta;
+	ta.solve(distancesMatrix);
+	
+	ss << std::endl;
+    ss << "Threshold matrix:";
+    for ( int row = 0 ; row < nrDrones ; row++ ) {
+        ss << std::endl;
+        for ( int col = 0 ; col < nrTasks ; col++ ) {
+            ss.width ( 5 );
+            ss << distancesMatrix ( row,col ) << ",";
+        }
+    }
+	
+    Munkres m;
+    m.solve ( distancesMatrix );
+
+    ss << std::endl;
+    ss << "Solved matrix:";
+    for ( int row = 0 ; row < nrDrones ; row++ ) {
+        ss << std::endl;
+        for ( int col = 0 ; col < nrTasks ; col++ ) {
+            ss.width ( 5 );
+            ss << distancesMatrix ( row,col ) << ",";
+        }
+    }
+    ss << std::endl;
+    ROS_INFO ( "%s",ss.str().c_str() );
+
+    for ( int i = 0; i < nrDrones; ++i ) {
+        for ( int j = 0; j < nrTasks; ++j ) {
+            if ( !distancesMatrix ( i,j ) ) {
+                drones_[i]->setGoal ( tasks_[j] );
+                tasks_[j] = std::make_pair ( -1,-1 );
+            }
+        }
+    }
+    tasks_.erase ( std::remove_if ( tasks_.begin(), tasks_.end(), isInvalidGoal ),tasks_.end() );
+    return true;
+}
+
+
 
 
 

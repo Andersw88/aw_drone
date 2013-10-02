@@ -9,8 +9,8 @@
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone1" />
-    <arg name="x" value="1.0" />
-    <arg name="y" value="1.0" />
+    <arg name="x" value="5.0" />
+    <arg name="y" value="5.0" />
 
   </include>
 

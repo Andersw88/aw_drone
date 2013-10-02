@@ -6,6 +6,7 @@
 #include <sstream>
 #include "aw_drone.h"
 #include "munkres.h"
+#include "threshold.h"
 
 
 #ifndef AW_TASK_DELIGATOR_QQQ
@@ -24,16 +25,27 @@ public:
 	bool getObjectivesSrv( aw_task_deligator::getObjectivesRequest& req, aw_task_deligator::getObjectivesResponse& resp);
 };
 
+
 class RandomTask : public TaskDeligator
 {
 public:
     RandomTask ( std::vector< boost::shared_ptr< Drone > > drones, std::vector< std::pair< double, double > > tasks );
     virtual bool allocTasksToDrones();
 };
+
+
 class HungarianTask : public TaskDeligator
 {
 public:
     HungarianTask ( std::vector< boost::shared_ptr< Drone > > drones, std::vector< std::pair< double, double > > tasks );
+    virtual bool allocTasksToDrones();
+};
+
+
+class ThresholdPlusHungarianTask : public TaskDeligator
+{
+public:
+    ThresholdPlusHungarianTask ( std::vector< boost::shared_ptr< Drone > > drones, std::vector< std::pair< double, double > > tasks );
     virtual bool allocTasksToDrones();
 };
 #endif
