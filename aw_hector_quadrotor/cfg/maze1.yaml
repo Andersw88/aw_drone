@@ -3,7 +3,10 @@ drones: ['drone1','drone2','drone3','drone4','drone5','drone6']
 aw:
   map_name: maze1
   live: false
-  drone_rad: 0.3
-  goal_tolerance: 1.0
-  multiplanner_vis: true
-  multiplanner_map_scale: 10
+  drone_rad: 0.30
+  goal_tolerance: 0.5
+  goal_deligator_mode: 0
+  multiplanner:
+    vis: false
+    map_scale: 10
+    maxtime: 500

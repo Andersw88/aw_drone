@@ -4,7 +4,7 @@
   
   <arg name="map_name" default="" />
 
-  <node name="map_server" pkg="map_server" type="map_server" args="$(find aw_move_base)/maps/$(arg map_name).yaml"/>
-  <rosparam command="load" file="$(find aw_task_deligator)/goals/$(arg map_name).yaml" />
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find aw_hector_quadrotor)/maps/$(arg map_name).yaml"/>
+  <rosparam command="load" file="$(find aw_hector_quadrotor)/goals/$(arg map_name).yaml" />
   <include file="$(find aw_hector_quadrotor)/launch/common.launch" />
 </launch>

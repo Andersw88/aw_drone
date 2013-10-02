@@ -46,7 +46,6 @@ def callGetObjectives():
 def multiPlannerService(req):
 	
 	objectives = callGetObjectives()
-	scale = 10
 	
 	map_name = rospy.get_param('aw/map_name', False)
 	multiplanner_vis = rospy.get_param('aw/multiplanner/vis', True)
