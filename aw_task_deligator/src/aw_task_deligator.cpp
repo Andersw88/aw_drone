@@ -19,20 +19,20 @@ int main ( int argc, char **argv )
     srand ( time ( NULL ) );
 
     ros::NodeHandle n;
-	
-	int deligatorMode = -1;
-	double goalTolerance = 0.5;
-	
+
+    int deligatorMode = -1;
+    double goalTolerance = 0.5;
+
     XmlRpc::XmlRpcValue Xdrones;
     XmlRpc::XmlRpcValue Xgoals;
     XmlRpc::XmlRpcValue xDeligatorMode;
-	XmlRpc::XmlRpcValue xGoalTolerance;
+    XmlRpc::XmlRpcValue xGoalTolerance;
 
     n.getParam ( "drones", Xdrones );
     n.getParam ( "goals", Xgoals );
     n.getParam ( "aw/goal_deligator_mode", xDeligatorMode );
-	n.getParam ( "aw/goal_tolerance", xGoalTolerance );
-	
+    n.getParam ( "aw/goal_tolerance", xGoalTolerance );
+
     if ( !Xdrones.valid() ) {
         ROS_FATAL ( "Invalid drones param" );
         return ( -1 );
@@ -41,17 +41,17 @@ int main ( int argc, char **argv )
         ROS_FATAL ( "Invalid goals param" );
         return ( -1 );
     }
-    if ( xDeligatorMode.valid() && xDeligatorMode.getType() ==  XmlRpc::XmlRpcValue::TypeInt) {
+    if ( xDeligatorMode.valid() && xDeligatorMode.getType() ==  XmlRpc::XmlRpcValue::TypeInt ) {
         deligatorMode  = static_cast<int> ( xDeligatorMode );
     } else {
         ROS_WARN ( "Invalid aw/goal_deligator_mode param. Defaulting to Hungarian" );
         deligatorMode = 0;
     }
-    
-	if ( xGoalTolerance.valid() && xGoalTolerance.getType() ==  XmlRpc::XmlRpcValue::TypeDouble) {
-		goalTolerance  = static_cast<double> ( xGoalTolerance );
+
+    if ( xGoalTolerance.valid() && xGoalTolerance.getType() ==  XmlRpc::XmlRpcValue::TypeDouble ) {
+        goalTolerance  = static_cast<double> ( xGoalTolerance );
     } else {
-		ROS_WARN ( "Invalid aw/goal_tolerance param. Defaulting to 0.5" );
+        ROS_WARN ( "Invalid aw/goal_tolerance param. Defaulting to 0.5" );
         goalTolerance = 0.5;
     }
 
@@ -74,11 +74,14 @@ int main ( int argc, char **argv )
         ros::spinOnce();
         dronesHasPosAndMove_base = true;
         for ( int i = 0; i< drones.size(); ++i ) {
-            dronesHasPosAndMove_base = drones[i]->hasPosAndMove_base(); 
+
+            dronesHasPosAndMove_base = drones[i]->hasPosAndMove_base();
             if ( !dronesHasPosAndMove_base ) {
                 ROS_INFO_NAMED ( "aw_task_deligator","Drone%d not ready yet. Waiting",i+1 );
                 break;
-            }
+            }/* else {
+                drones[i]->publishCurrentPosAsGoal();
+            }*/
         }
         sleep ( 1 );
     }
@@ -86,7 +89,7 @@ int main ( int argc, char **argv )
         drones[i]->publishCurrentPosAsGoal();
     }
 
-	TaskDeligator* taskAlloc = NULL;
+    TaskDeligator* taskAlloc = NULL;
     switch ( deligatorMode ) {
     case 0:
         taskAlloc = new HungarianTask ( drones,tasks );
@@ -94,7 +97,7 @@ int main ( int argc, char **argv )
     case 1:
         taskAlloc = new RandomTask ( drones,tasks );
         break;
-	case 2:
+    case 2:
         taskAlloc = new ThresholdPlusHungarianTask ( drones,tasks );
         break;
     default:

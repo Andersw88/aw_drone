@@ -9,12 +9,17 @@ from geometry_msgs.msg import Point
 from geometry_msgs.msg import Pose
 from geometry_msgs.msg import Quaternion
 
+
 from std_msgs.msg import String
 from std_msgs.msg import Header
 import tf
 from pprint import pprint
 from aw_multi_solver_wrapper.srv import *
+from std_srvs.srv import *
+
 import os,subprocess
+import time
+
 
 class TaskPlayer():
     
@@ -25,6 +30,15 @@ class TaskPlayer():
 		#filePath = os.path.join(os.path.dirname(__file__), 'paths.txt')
 		#with open(filePath, 'r') as content_file:
 			#dronePaths = content_file.read()
+		rospy.wait_for_service('/gazebo/unpause_physics')
+		time.sleep(10)
+
+		try:
+			unpause = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
+			unpause()
+		except rospy.ServiceException, e:
+			print "Service call failed: %s"%e
+		
 			
 		droneNames = []
 		droneNames = rospy.get_param('drones', droneNames)

@@ -35,19 +35,19 @@
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone5" />
-    <arg name="x" value="6.0" />
+    <arg name="x" value="6.5" />
     <arg name="y" value="0.5" />
   </include>
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone6" />
-    <arg name="x" value="7.0" />
+    <arg name="x" value="7.5" />
     <arg name="y" value="1.0" />
   </include>
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone7" />
-    <arg name="x" value="12.0" />
+    <arg name="x" value="13.0" />
     <arg name="y" value="1.0" />
   </include>
 

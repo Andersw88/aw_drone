@@ -6,6 +6,6 @@ aw:
   drone_rad: 0.40
   goal_tolerance: 0.5
   multiplanner:
-    vis: false
+    vis: true
     map_scale: 10
     maxtime: 500

@@ -4,6 +4,8 @@
   <arg name="rviz_config" default="default.rviz"/> 
   <include file="$(find aw_hector_quadrotor)/launch/empty_world.launch">
     <arg name="gui" value="false"/>
+    <arg name="paused" default="true"/>
+    <arg name="world_name" value="$(find aw_hector_quadrotor)/world/empty.world"/>
   </include>
 
   <node name="aw_task_deligator" pkg="aw_task_deligator" type="aw_task_deligator" output="screen" />
