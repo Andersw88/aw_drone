@@ -1,0 +1,3364 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<multiagentproblem>
+  <environment>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>0</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>10</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>10</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>0</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>10</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>20</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>20</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>10</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>20</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>30</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>30</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>20</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>30</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>40</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>40</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>30</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>40</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>50</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>50</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>40</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>50</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>60</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>60</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>50</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>60</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>70</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>70</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>60</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>60</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>70</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>70</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>60</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>60</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>70</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>70</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>60</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>60</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>70</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>70</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>60</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>60</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>70</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>70</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>60</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>70</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>80</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>80</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>70</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>70</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>80</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>80</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>70</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>70</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>80</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>80</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>70</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>70</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>80</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>80</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>70</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>70</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>80</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>80</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>70</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>80</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>90</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>90</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>80</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>80</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>90</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>90</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>80</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>80</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>90</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>90</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>80</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>80</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>90</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>90</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>80</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>80</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>90</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>90</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>80</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>90</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>100</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>100</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>90</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>100</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>110</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>110</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>100</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>110</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>120</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>120</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>110</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>120</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>130</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>130</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>120</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>130</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>140</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>140</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>130</x>
+<y>0</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>150</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>150</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>140</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>140</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>140</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>140</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>130</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>130</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>130</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>130</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>120</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>120</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>120</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>120</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>110</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>110</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>110</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>110</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>100</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>100</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>100</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>100</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>90</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>90</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>90</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>90</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>80</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>80</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>80</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>80</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>70</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>70</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>70</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>70</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>60</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>60</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>60</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>60</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>50</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>50</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>50</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>50</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>40</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>40</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>40</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>40</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>30</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>30</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>30</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>30</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>20</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>20</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>20</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>20</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>10</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>10</y>
+</point>
+</obstacle>
+<obstacle>
+<point id="0">
+<x>140</x>
+<y>10</y>
+</point>
+<point id="1">
+<x>150</x>
+<y>10</y>
+</point>
+<point id="2">
+<x>150</x>
+<y>0</y>
+</point>
+<point id="3">
+<x>140</x>
+<y>0</y>
+</point>
+</obstacle>
+    <bounds>
+      <point>
+        <x>0</x>
+        <y>0</y>
+      </point>
+      <point>
+        <x>150</x>
+        <y>150</y>
+      </point>
+    </bounds>
+</environment>
+  <agents/>
+</multiagentproblem>

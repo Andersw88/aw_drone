@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="tdm" default="0"/>
+  <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
+  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze3.yaml" />
+
+
+  <include file="$(find aw_hector_quadrotor)/launch/map.launch">
+    <arg name="map_name" value="maze3" />
+  </include>
+  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone1" />
+    <arg name="x" value="1.0" />
+    <arg name="y" value="1.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone2" />
+    <arg name="x" value="3.0" />
+    <arg name="y" value="1.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone3" />
+    <arg name="x" value="1.0" />
+    <arg name="y" value="3.0" />
+  </include>
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone4" />
+    <arg name="x" value="5.0" />
+    <arg name="y" value="12.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone5" />
+    <arg name="x" value="12.0" />
+    <arg name="y" value="1.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone6" />
+    <arg name="x" value="14.0" />
+    <arg name="y" value="1.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone7" />
+    <arg name="x" value="12.0" />
+    <arg name="y" value="3.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone8" />
+    <arg name="x" value="6.0" />
+    <arg name="y" value="14.0" />
+  </include>
+</launch>

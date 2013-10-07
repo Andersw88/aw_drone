@@ -1,0 +1,10 @@
+drones: ['drone1','drone2','drone3','drone4','drone5','drone6','drone7','drone8']
+aw:
+  map_name: maze3
+  live: false
+  drone_rad: 0.4
+  goal_tolerance: 0.5
+  multiplanner:
+    vis: false
+    map_scale: 10
+    maxtime: 1000

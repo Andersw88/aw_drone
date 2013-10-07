@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>
+  <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6','drone7','drone8']</rosparam>
+  <param name="aw/map_name" value="maze3"/>
+  <node name="aw_ascii_pgm_to_random_goals" type="aw_ascii_pgm_to_random_goals.py" pkg="aw_multi_solver_wrapper" output="screen"/>
+  <!-- <node name="aw_multi_service" type="aw_multi_service.py" pkg="aw_multi_solver_wrapper" output="screen" /> -->
+
+
+</launch>
