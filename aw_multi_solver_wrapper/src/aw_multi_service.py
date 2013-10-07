@@ -60,7 +60,7 @@ def multiPlannerService(req):
 		
 	jsonObjectives = json.dumps({'method': 'PP',
 								'problemfile': '%s/problems/%s.xml' %(os.path.join(os.path.dirname(__file__)),map_name,),
-								'timeout': 80000,
+								'timeout': 100000,
 								'showvis': multiplanner_vis,
 								'maxtime': maxtime,
 								'gridStep': grid_step,
@@ -85,7 +85,8 @@ def multiPlannerService(req):
 	
 	
 if __name__ == '__main__':
-	rospy.init_node('aw_multi_solver_wrapper', anonymous=True)	
+	#rospy.init_node('aw_multi_solver_wrapper', anonymous=True)	
+	rospy.init_node('aw_multi_service', anonymous=True)	
 	
 	#command_line = raw_input()
 	#args = shlex.split(command_line)

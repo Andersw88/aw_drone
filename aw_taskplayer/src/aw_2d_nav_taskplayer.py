@@ -19,6 +19,9 @@ from std_srvs.srv import *
 
 import os,subprocess
 import time
+import csv
+
+
 
 
 class TaskPlayer():
@@ -30,6 +33,8 @@ class TaskPlayer():
 		#filePath = os.path.join(os.path.dirname(__file__), 'paths.txt')
 		#with open(filePath, 'r') as content_file:
 			#dronePaths = content_file.read()
+		
+			
 		rospy.wait_for_service('/gazebo/unpause_physics')
 		time.sleep(10)
 
@@ -56,7 +61,10 @@ class TaskPlayer():
 			
 		rospy.wait_for_service('getMultiPlan')
 		dronePaths = self.getPlan()
-		pprint(dronePaths)
+		self.success = True;
+		if(dronePaths[0:2] == "No"):
+			self.success = False;
+		#pprint(dronePaths)
 		lineSeperatedPaths = dronePaths.strip(", \n").split("\n")
 		commaSeperatedPaths = [i.strip(", ").split(",") for i in lineSeperatedPaths]
 		spaceSeperatedPaths = [[j.strip(", ").split(" ")for j in i] for i in commaSeperatedPaths]
@@ -89,7 +97,7 @@ class TaskPlayer():
 
 			
 			
-		
+		print "Total distance = ",self.calculateTotalTravelDistance();
 		if(self.isLive):
 			rospy.loginfo("aw_2d_nav_taskplayer: Executing plan for live drones")
 		else:
@@ -106,7 +114,18 @@ class TaskPlayer():
 			return resp1.plans
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
-		
+	
+	def writeResult(self):
+		totalTime = (rospy.get_rostime() - self.start_time).secs
+		totalTravelDistance = self.calculateTotalTravelDistance()
+		filePath = os.path.join(os.path.dirname(__file__),'results.csv')
+		print filePath
+		with open(filePath, 'a') as csvfile:
+			resultWrite = csv.writer(csvfile, delimiter=',',
+									quotechar='|', quoting=csv.QUOTE_MINIMAL)
+			resultWrite.writerow([len(self.drones_),self.success,totalTime, totalTravelDistance])
+	
+	
 	def update(self):
 		#rospy.loginfo("update called")
 		if(self.currentTimeStepIndex == 0):
@@ -116,8 +135,7 @@ class TaskPlayer():
 		if(all(i['nextPoseReached'] for i in self.drones_)):
 			self.currentTimeStepIndex += 1
 			if(self.currentTimeStepIndex >= len(self.timeSteps)):
-				#if(self.isLive):
-					
+				self.writeResult()
 				rospy.loginfo("TaskPlayer is now finnished, time since start %s" %((rospy.get_rostime() - self.start_time).secs,))
 				rospy.signal_shutdown("Finnished")
 				return
@@ -142,6 +160,19 @@ class TaskPlayer():
 
 			drone['nextPoseReached'] = True
 	
+	def calculateTotalTravelDistance(self):
+		
+		#pprint(self.timeSteps)
+		distSum = 0
+		for drone in self.drones_:
+			#pprint(drone['path'])
+			for i in range(0,len(self.timeSteps)-1):
+				if(self.timeSteps[i] in drone['path'] and self.timeSteps[i+1] in drone['path']):
+					distSum += ((drone['path'][self.timeSteps[i+1]][0] - drone['path'][self.timeSteps[i]][0])**2 + (drone['path'][self.timeSteps[i+1]][1] - drone['path'][self.timeSteps[i]][1])**2)**0.5
+		return distSum
+				
+			
+			
 	def publishDronePaths(self):
 		q = Quaternion(w=1)
 		for drone in self.drones_:
@@ -185,5 +216,5 @@ if __name__ == '__main__':
 	while not rospy.is_shutdown():
 		taskPlayer.update()
 		#taskPlayer.publishDronePaths()
-		rospy.sleep(0.1)
+		rospy.sleep(0.05)
         

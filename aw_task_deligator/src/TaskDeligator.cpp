@@ -16,6 +16,7 @@ bool TaskDeligator::getObjectivesSrv ( aw_task_deligator::getObjectivesRequest& 
     for ( int i = 0; i<drones_.size(); ++i ) {
 
         if ( !drones_[i]->hasGoalAndPos() ) {
+			ROS_ERROR("%s,failed on hasGoalAndPos",drones_[i]->getName().c_str());
             return false;
         }
 

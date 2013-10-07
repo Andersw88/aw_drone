@@ -29,7 +29,7 @@ int main ( int argc, char **argv )
     XmlRpc::XmlRpcValue xGoalTolerance;
 
     n.getParam ( "drones", Xdrones );
-    n.getParam ( "goals", Xgoals );
+    
     n.getParam ( "aw/goal_deligator_mode", xDeligatorMode );
     n.getParam ( "aw/goal_tolerance", xGoalTolerance );
 
@@ -37,10 +37,15 @@ int main ( int argc, char **argv )
         ROS_FATAL ( "Invalid drones param" );
         return ( -1 );
     }
-    if ( !Xgoals.valid() ) {
-        ROS_FATAL ( "Invalid goals param" );
-        return ( -1 );
-    }
+    do{
+		n.getParam ( "aw/goals", Xgoals );
+//     if ( !Xgoals.valid() ) {
+//         ROS_FATAL ( "Invalid goals param" );
+//         return ( -1 );
+//     }
+		sleep(1);
+	} while(!Xgoals.valid());
+    
     if ( xDeligatorMode.valid() && xDeligatorMode.getType() ==  XmlRpc::XmlRpcValue::TypeInt ) {
         deligatorMode  = static_cast<int> ( xDeligatorMode );
     } else {

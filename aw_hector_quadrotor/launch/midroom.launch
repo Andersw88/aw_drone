@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="tgm" default="0"/>
-  <param name="aw/goal_deligator_mode" type="int" value="$(arg tgm)"/>
+  <arg name="tdm" default="0"/>
+  <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
   <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/midroom.yaml" />
 
   <include file="$(find aw_hector_quadrotor)/launch/map.launch">
