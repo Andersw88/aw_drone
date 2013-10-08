@@ -35,14 +35,14 @@ class TaskPlayer():
 			#dronePaths = content_file.read()
 		
 			
-		rospy.wait_for_service('/gazebo/unpause_physics')
-		time.sleep(10)
+		#rospy.wait_for_service('/gazebo/unpause_physics')
+		#time.sleep(10)
 
-		try:
-			unpause = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
-			unpause()
-		except rospy.ServiceException, e:
-			print "Service call failed: %s"%e
+		#try:
+			#unpause = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
+			#unpause()
+		#except rospy.ServiceException, e:
+			#print "Service call failed: %s"%e
 		
 			
 		droneNames = []
@@ -62,9 +62,14 @@ class TaskPlayer():
 		rospy.wait_for_service('getMultiPlan')
 		dronePaths = self.getPlan()
 		self.success = True;
-		if(dronePaths[0:2] == "No"):
+		#print ":",dronePaths[0:2], ": <-------------------------------------------------------" 
+		if(dronePaths == '' or dronePaths[0:2] == "No"):
 			self.success = False;
-		#pprint(dronePaths)
+			self.writeResult()
+			rospy.signal_shutdown("Failed to find solution")
+			return
+			
+		pprint(dronePaths)
 		lineSeperatedPaths = dronePaths.strip(", \n").split("\n")
 		commaSeperatedPaths = [i.strip(", ").split(",") for i in lineSeperatedPaths]
 		spaceSeperatedPaths = [[j.strip(", ").split(" ")for j in i] for i in commaSeperatedPaths]
@@ -102,6 +107,9 @@ class TaskPlayer():
 			rospy.loginfo("aw_2d_nav_taskplayer: Executing plan for live drones")
 		else:
 			rospy.loginfo("aw_2d_nav_taskplayer: Executing plan for simulated drones")
+			
+			
+		self.publishDronePaths()
 		
 		#pprint(self.drones_)
 		#print 'c goto(',self.drones_[0]['currentGoal'][0],self.drones_[0]['currentGoal'][1],')'
@@ -114,16 +122,24 @@ class TaskPlayer():
 			return resp1.plans
 		except rospy.ServiceException, e:
 			print "Service call failed: %s"%e
+			return ''
 	
 	def writeResult(self):
-		totalTime = (rospy.get_rostime() - self.start_time).secs
-		totalTravelDistance = self.calculateTotalTravelDistance()
-		filePath = os.path.join(os.path.dirname(__file__),'results.csv')
+		filePath = os.path.join(os.path.dirname(__file__),'../../results.csv')
+		totalTime = None
+		totalTravelDistance = None
+		if(self.success):
+			totalTime = (rospy.get_rostime() - self.start_time).secs
+			totalTravelDistance = self.calculateTotalTravelDistance()
+		
+		method = rospy.get_param('aw/multiplanner/method', 'PP')
+		tdm = rospy.get_param('aw/goal_deligator_mode',-1)
+		
 		print filePath
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 									quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			resultWrite.writerow([len(self.drones_),self.success,totalTime, totalTravelDistance])
+			resultWrite.writerow([len(self.drones_),method,tdm,self.success,totalTime, totalTravelDistance])
 	
 	
 	def update(self):
@@ -212,9 +228,10 @@ if __name__ == '__main__':
 	taskPlayer = TaskPlayer()
 	#rospy.sleep(10.0) #Needed to let publisher initialize
 	#taskPlayer.delayedInit()
-	taskPlayer.publishDronePaths()
+
 	while not rospy.is_shutdown():
+		rospy.sleep(0.05)
 		taskPlayer.update()
 		#taskPlayer.publishDronePaths()
-		rospy.sleep(0.05)
+		
         

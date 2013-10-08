@@ -14,17 +14,19 @@ bool TaskDeligator::getObjectivesSrv ( aw_task_deligator::getObjectivesRequest& 
     geometry_msgs::Point start;
     geometry_msgs::Point target;
     for ( int i = 0; i<drones_.size(); ++i ) {
-
+		
+		std::pair<double,double> pos = drones_[i]->getPos();
+		std::pair<double,double> goal = drones_[i]->getGoal();
         if ( !drones_[i]->hasGoalAndPos() ) {
-			ROS_ERROR("%s,failed on hasGoalAndPos",drones_[i]->getName().c_str());
-            return false;
+			ROS_WARN("%s,failed on hasGoalAndPos dronePos:%f,%f;goal:%f,%f, Drone might already be at goal",drones_[i]->getName().c_str(),pos.first,pos.second,goal.first,goal.second);
+
         }
 
-        start.x = drones_[i]->getPos().first;
-        start.y = drones_[i]->getPos().second;
+        start.x = pos.first;
+        start.y = pos.second;
 
-        target.x = drones_[i]->getGoal().first;
-        target.y = drones_[i]->getGoal().second;
+        target.x = goal.first;
+        target.y = goal.second;
 
 //         objs.starts.push_back ( geometry_msgs::Point(drones_[i]->getPos().first,drones_[i]->getPos().second) );
 //         objs.targets.push_back ( geometry_msgs::Point(drones_[i]->getGoal().first,drones_[i]->getGoal().second));

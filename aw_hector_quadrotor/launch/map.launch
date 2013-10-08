@@ -6,6 +6,5 @@
 
   <node name="map_server" pkg="map_server" type="map_server" args="$(find aw_hector_quadrotor)/maps/$(arg map_name).yaml"/>
   <node name="aw_ascii_pgm_to_random_goals" type="aw_ascii_pgm_to_random_goals.py" pkg="aw_multi_solver_wrapper" output="screen"/>
-  <!-- <rosparam command="load" file="$(find aw_hector_quadrotor)/goals/$(arg map_name).yaml" /> -->
-  <include file="$(find aw_hector_quadrotor)/launch/common.launch" />
+
 </launch>

@@ -53,14 +53,16 @@ def multiPlannerService(req):
 	multiplanner_map_scale = rospy.get_param('aw/multiplanner/map_scale', 10)
 	grid_step = rospy.get_param('aw/multiplanner/grid_step', 5)
 	drone_rad = rospy.get_param('aw/drone_rad', 0.5)
-	maxtime = rospy.get_param('aw/multiplanner/maxtime', 300)
+	maxtime = rospy.get_param('aw/multiplanner/maxtime', 400)
+	timeout = rospy.get_param('aw/multiplanner/timeout', 100000)
+	method = rospy.get_param('aw/multiplanner/method', 'PP')
 	
 	if(not(map_name)):
 		rospy.logerr('aw_multi_solver_wrapper: param "aw/map_name" not set')
 		
-	jsonObjectives = json.dumps({'method': 'PP',
+	jsonObjectives = json.dumps({'method': method,
 								'problemfile': '%s/problems/%s.xml' %(os.path.join(os.path.dirname(__file__)),map_name,),
-								'timeout': 100000,
+								'timeout': timeout,
 								'showvis': multiplanner_vis,
 								'maxtime': maxtime,
 								'gridStep': grid_step,

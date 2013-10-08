@@ -1,12 +1,19 @@
 <?xml version="1.0"?>
 <launch>
+
   <arg name="tdm" default="0"/>
+  <arg name="mpm" default="PP"/>
+  <arg name="rviz" default="1"/>
   <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
-  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze2.yaml.yaml" />
+  <param name="aw/multiplanner/method" type="string" value="$(arg mpm)"/>
+  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze2.yaml" />
 
 
   <include file="$(find aw_hector_quadrotor)/launch/map.launch">
     <arg name="map_name" value="maze2" />
+  </include>
+  <include file="$(find aw_hector_quadrotor)/launch/common.launch" >
+    <arg name="rviz" value="$(arg rviz)" />
   </include>
   <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
 

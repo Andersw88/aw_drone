@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 
 <launch>
+  <arg name="rviz" default="1"/>
   <arg name="rviz_config" default="default.rviz"/> 
   <include file="$(find aw_hector_quadrotor)/launch/empty_world.launch">
     <arg name="gui" value="false"/>
-    <arg name="paused" default="true"/>
+    <!-- <arg name="paused" default="true"/> -->
     <arg name="world_name" value="$(find aw_hector_quadrotor)/world/empty.world"/>
   </include>
 
@@ -13,5 +14,5 @@
   <node name="aw_multi_solver_wrapper" type="aw_multi_service.py" pkg="aw_multi_solver_wrapper" output="screen"/>
   <!-- <node name="taskplayer" pkg="aw_taskplayer" type="aw_taskplayer.py" output="screen"/> -->
   <!-- <node name="ground_truth_to_tum_state" pkg="tud_liu_tasks" type="ground_truth_to_tum_state.py" output="screen" /> -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find aw_hector_quadrotor)/cfg/$(arg rviz_config)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find aw_hector_quadrotor)/cfg/$(arg rviz_config)" if="$(arg rviz)"/>
 </launch>
