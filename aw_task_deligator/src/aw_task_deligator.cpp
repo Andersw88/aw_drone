@@ -28,21 +28,22 @@ int main ( int argc, char **argv )
     XmlRpc::XmlRpcValue xDeligatorMode;
     XmlRpc::XmlRpcValue xGoalTolerance;
 
-    n.getParam ( "drones", Xdrones );
+    
     
     n.getParam ( "aw/goal_deligator_mode", xDeligatorMode );
     n.getParam ( "aw/goal_tolerance", xGoalTolerance );
 
-    if ( !Xdrones.valid() ) {
-        ROS_FATAL ( "Invalid drones param" );
-        return ( -1 );
-    }
-    do{
-		n.getParam ( "aw/goals", Xgoals );
-//     if ( !Xgoals.valid() ) {
-//         ROS_FATAL ( "Invalid goals param" );
+//     if ( !Xdrones.valid() ) {
+//         ROS_FATAL ( "Invalid drones param" );
 //         return ( -1 );
 //     }
+	do{
+		n.getParam ( "drones", Xdrones );
+		sleep(1);
+	} while(!Xdrones.valid());
+    
+    do{
+		n.getParam ( "aw/goals", Xgoals );
 		sleep(1);
 	} while(!Xgoals.valid());
     

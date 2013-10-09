@@ -43,10 +43,15 @@ class TaskPlayer():
 			#unpause()
 		#except rospy.ServiceException, e:
 			#print "Service call failed: %s"%e
+
 		
 			
 		droneNames = []
 		droneNames = rospy.get_param('drones', droneNames)
+		#droneNames = rospy.get_param('drones', droneNames)
+		while(len(droneNames) == 0):
+			rospy.info("Waiting for param 'drones'")
+			time.sleep(1)
 		self.goalTolerance_ = rospy.get_param('aw/goal_tolerance', droneNames)
 		multiPlannerMapScale = float(rospy.get_param('aw/multiplanner/map_scale', 10.0))
 		self.drones_ = [{} for _ in range(0,len(droneNames))]

@@ -3,6 +3,11 @@
   <arg name="tdm" default="0"/>
   <arg name="mpm" default="PP"/>
   <arg name="rviz" default="1"/>
+  <arg name="starts" default=""/>
+  <arg name="goals" default=""/>
+
+  <rosparam param="aw/starts" subst_value="true">$(arg starts)</rosparam>
+  <rosparam param="aw/goals" subst_value="true">$(arg goals)</rosparam>
   <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
   <param name="aw/multiplanner/method" type="string" value="$(arg mpm)"/>
   <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze3.yaml" />
@@ -14,7 +19,11 @@
   <include file="$(find aw_hector_quadrotor)/launch/common.launch" >
      <arg name="rviz" value="$(arg rviz)" />
   </include>
-  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" />
+
+  <!-- <node name="aw_ascii_pgm_to_random_init" type="aw_ascii_pgm_to_random_init.py" pkg="aw_multi_solver_wrapper" output="screen"/> -->
+
+
+  <!-- <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor.gazebo.xacro" /> -->
 
   <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
     <arg name="name" value="drone1" />
