@@ -53,7 +53,7 @@ class Runner():
 	def run(self,taskDeligatorMode,multiplannerMethod):
 		
 		for i in range(0,self.iterations):
-			args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=1', 'tdm:=%s'%(taskDeligatorMode,),'mpm:=%s'%(multiplannerMethod,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
+			args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=0', 'tdm:=%s'%(taskDeligatorMode,),'mpm:=%s'%(multiplannerMethod,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
 			#pprint(args)
 			subprocess.check_output(args)
 			self.totalIterations += 1
@@ -64,7 +64,7 @@ if __name__ == '__main__':
 	
 	
 	
-	runner = Runner(8,1)
+	runner = Runner(8,50)
 	
 	runner.run(0,'PP')
 	runner.run(0,'IIHP')
