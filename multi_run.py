@@ -85,7 +85,7 @@ if __name__ == '__main__':
 	
 	
 	
-	runner = Runner(8,2,[0],['PP'])
+	runner = Runner(8,50,[0],['PP','IIHP'])
 	
 	#runner.runWith(0,'PP')
 	#runner.runWith(0,'IIHP')
