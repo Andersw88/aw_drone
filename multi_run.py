@@ -4,10 +4,13 @@ import sys,os,subprocess
 import time
 from random import random
 from pprint import pprint
+import csv
 
 class Runner():
 	
-	def __init__(self,numDrones,iterations):
+	def __init__(self,numDrones,iterations,tdms,mpms):
+		self.tdms = tdms
+		self.mpms = mpms
 		self.start = time.time()
 		self.iterations = iterations
 		self.totalIterations = 0
@@ -23,6 +26,7 @@ class Runner():
 
 		self.mapData =  [mapData[i:i+self.mapSize[0]] for i in range(0, len(mapData), self.mapSize[0])]
 		self.starts,self.goals = self.genStartsAndGoals(numDrones)
+		#print self.goals
 
 		
 	def genStartsAndGoals(self,numDrones):
@@ -47,28 +51,46 @@ class Runner():
 					starts.add(start)
 			startsList.append([[start[0],start[1]] for start in starts])
 			
-		
+
 		return startsList,goalsList
 
 	def run(self,taskDeligatorMode,multiplannerMethod):
 		
 		for i in range(0,self.iterations):
-			args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=0', 'tdm:=%s'%(taskDeligatorMode,),'mpm:=%s'%(multiplannerMethod,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
-			#pprint(args)
+			args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(taskDeligatorMode,),'mpm:=%s'%(multiplannerMethod,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
 			subprocess.check_output(args)
 			self.totalIterations += 1
 			print 'Finnished %s iteration. Method:%s,%s. Total time spent:%s'%(self.totalIterations,taskDeligatorMode,multiplannerMethod,time.time()-self.start)
 			
 
+	def runAll(self):
+		
+		for i in range(0,self.iterations):
+			self.logProblem(i)
+			for tdm in self.tdms:
+				for mpm in self.mpms:
+					args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
+					subprocess.check_output(args)
+					self.totalIterations += 1
+					print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
+	
+	def logProblem(self,i):
+		filePath = os.path.join(os.path.dirname(__file__),'problem_setups.csv')
+		with open(filePath, 'a') as csvfile:
+			resultWrite = csv.writer(csvfile, delimiter=',',
+			quotechar='|', quoting=csv.QUOTE_MINIMAL)
+			resultWrite.writerow([i,self.starts[i],self.goals[i]])
+
 if __name__ == '__main__':
 	
 	
 	
-	runner = Runner(8,50)
+	runner = Runner(8,2,[0],['PP'])
 	
-	runner.run(0,'PP')
-	runner.run(0,'IIHP')
-	runner.run(2,'PP')
-	runner.run(2,'IIHP')
+	#runner.runWith(0,'PP')
+	#runner.runWith(0,'IIHP')
+	#runner.runWith(2,'PP')
+	#runner.runWith(2,'IIHP')
+	runner.runAll()
 	print "Python script is now finnished"
 

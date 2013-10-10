@@ -8,6 +8,7 @@
 #include <complex>
 #include "aw_drone.h"
 #include "TaskDeligator.h"
+#include "std_srvs/Empty.h"
 
 
 
@@ -25,11 +26,14 @@ int main ( int argc, char **argv )
 
     XmlRpc::XmlRpcValue Xdrones;
     XmlRpc::XmlRpcValue Xgoals;
+    XmlRpc::XmlRpcValue Xstarts;
     XmlRpc::XmlRpcValue xDeligatorMode;
     XmlRpc::XmlRpcValue xGoalTolerance;
 
-    
-    
+    bool live = false;
+
+
+
     n.getParam ( "aw/goal_deligator_mode", xDeligatorMode );
     n.getParam ( "aw/goal_tolerance", xGoalTolerance );
 
@@ -37,16 +41,20 @@ int main ( int argc, char **argv )
 //         ROS_FATAL ( "Invalid drones param" );
 //         return ( -1 );
 //     }
-	do{
-		n.getParam ( "drones", Xdrones );
-		sleep(1);
-	} while(!Xdrones.valid());
-    
-    do{
-		n.getParam ( "aw/goals", Xgoals );
-		sleep(1);
-	} while(!Xgoals.valid());
-    
+    do {
+        n.getParam ( "drones", Xdrones );
+        sleep ( 1 );
+    } while ( !Xdrones.valid() );
+
+    do {
+        n.getParam ( "aw/goals", Xgoals );
+        sleep ( 1 );
+    } while ( !Xgoals.valid() );
+    do {
+        n.getParam ( "aw/starts", Xstarts );
+        sleep ( 1 );
+    } while ( !Xgoals.valid() );
+
     if ( xDeligatorMode.valid() && xDeligatorMode.getType() ==  XmlRpc::XmlRpcValue::TypeInt ) {
         deligatorMode  = static_cast<int> ( xDeligatorMode );
     } else {
@@ -66,14 +74,20 @@ int main ( int argc, char **argv )
         tasks.push_back ( std::make_pair ( static_cast<double> ( Xgoals[i][0] ),static_cast<double> ( Xgoals[i][1] ) ) );
     }
 
+    std::vector<std::pair<double,double> > starts;
+    if ( Xstarts.valid() && Xstarts.getType() ==  XmlRpc::XmlRpcValue::TypeArray ) {
+        for ( int i = 0; i < Xstarts.size(); i++ ) {
+            starts.push_back ( std::make_pair ( static_cast<double> ( Xstarts[i][0] ),static_cast<double> ( Xstarts[i][1] ) ) );
+        }
+    }
+
     std::vector<boost::shared_ptr<Drone> > drones;
     for ( int i = 0; i < Xdrones.size(); i++ ) {
         drones.push_back ( boost::make_shared<Drone> ( static_cast<std::string> ( Xdrones[i] ) ) );
         ROS_INFO ( "Found drone name :%s", drones[i]->getName().c_str() );
     }
 
-    // TaskAllocator* taskAlloc =  new RandomTaskAllocator(drones,tasks);
-//     RandomTask taskAlloc ( drones,tasks );
+
     ros::Rate loop_rate ( 0.15 );
     bool dronesHasPosAndMove_base = false;
     while ( !dronesHasPosAndMove_base ) { //Makes Sure that all drones are initalized.
@@ -91,8 +105,24 @@ int main ( int argc, char **argv )
         }
         sleep ( 1 );
     }
-    for ( int i = 0; i< drones.size(); ++i ) {
-        drones[i]->publishCurrentPosAsGoal();
+    if ( !live && starts.size() == drones.size() )	{
+        ros::ServiceClient pause = n.serviceClient<std_srvs::Empty> ( "/gazebo/pause_physics" );
+        std_srvs::Empty srv;
+        if ( pause.call ( srv ) ) {
+            for ( int i = 0; i< drones.size(); ++i ) {
+                if ( drones[i]->setGazeboPos ( starts[i] ) ) {
+                    drones[i]->publishCurrentPosAsGoal();
+                }
+                ros::ServiceClient unpause = n.serviceClient<std_srvs::Empty> ( "/gazebo/unpause_physics" );
+                if ( !unpause.call ( srv ) ) {
+                    ROS_FATAL ( "Failed to unpause physics" );
+                    return 1;
+                }
+            }
+        } else {
+            ROS_FATAL ( "Failed to pause physics" );
+            return 1;
+        }
     }
 
     TaskDeligator* taskAlloc = NULL;

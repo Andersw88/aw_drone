@@ -138,13 +138,14 @@ class TaskPlayer():
 			totalTravelDistance = self.calculateTotalTravelDistance()
 		
 		method = rospy.get_param('aw/multiplanner/method', 'PP')
-		tdm = rospy.get_param('aw/goal_deligator_mode',-1)
+		tdm = rospy.get_param('aw/goal_deligator_mode',0)
+		run_id = rospy.get_param('aw/run_id',0)
 		
 		print filePath
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 									quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			resultWrite.writerow([len(self.drones_),method,tdm,self.success,totalTime, totalTravelDistance])
+			resultWrite.writerow([run_id,len(self.drones_),method,tdm,self.success,totalTime, totalTravelDistance])
 	
 	
 	def update(self):

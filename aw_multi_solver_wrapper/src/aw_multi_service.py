@@ -31,7 +31,8 @@ class SolverWrapper():
 		#dirPath = os.path.join(os.path.dirname(__file__))
 		process = subprocess.Popen(list(args), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		stdout, stderr = process.communicate()
-		rospy.logerr("From java: " + stderr)
+		if(stderr):
+			rospy.logerr("From java: " + stderr)
 		return stdout
 	
     

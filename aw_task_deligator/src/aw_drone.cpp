@@ -30,9 +30,30 @@ void Drone::publishCurrentPosAsGoal()
     goal.x = position_.first;
     goal.y = position_.second;
     goalPub_.publish ( goal );
+}
 
+bool Drone::setGazeboPos(std::pair<double,double> pos)
+{	
+	ros::ServiceClient client = n_.serviceClient<gazebo_msgs::SetModelState>("/gazebo/set_model_state");
 
-
+	gazebo_msgs::SetModelState srv;
+	srv.request.model_state.model_name = name_;
+	srv.request.model_state.pose.position.x = pos.first;
+	srv.request.model_state.pose.position.y = pos.second;
+	srv.request.model_state.pose.orientation.w = 1;
+ 	srv.request.model_state.reference_frame = "map";
+	if (client.call(srv))
+	{
+		position_ = pos;
+		return true;
+	}
+	else
+	{
+		ROS_WARN("%s: setGazeboPos failed",name_.c_str());
+		return false;
+	}
+	
+	
 }
 void Drone::setGoal ( const std::pair<double,double>& goal )
 {

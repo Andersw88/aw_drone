@@ -4,6 +4,7 @@
 #include "geometry_msgs/Point.h"
 #include "nav_msgs/Odometry.h"
 #include "nav_msgs/GetPlan.h"
+#include "gazebo_msgs/SetModelState.h"
 
 #include <math.h>
 
@@ -41,6 +42,7 @@ public:
     bool getMove_baseDistances ( const std::vector< std::pair< double, double > >& goals, std::vector< double >& distances );
 	void publishCurrentPosAsGoal();
 	
+	bool setGazeboPos(std::pair<double,double> pos);
     const std::pair<double,double>& getPos();
 	const std::pair<double,double>& getGoal();
 
