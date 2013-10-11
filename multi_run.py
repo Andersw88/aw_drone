@@ -70,7 +70,7 @@ class Runner():
 			self.logProblem(i)
 			for tdm in self.tdms:
 				for mpm in self.mpms:
-					args = ['roslaunch', 'aw_hector_quadrotor', 'maze3-%s.launch'%(self.numDrones,),'rviz:=1','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
+					args = ['roslaunch', 'aw_hector_quadrotor', 'maze3-%s.launch'%(self.numDrones,),'rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
 					subprocess.check_output(args)
 					self.totalIterations += 1
 					print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
