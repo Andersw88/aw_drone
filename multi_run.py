@@ -9,6 +9,7 @@ import csv
 class Runner():
 	
 	def __init__(self,numDrones,iterations,tdms,mpms):
+		self.numDrones = numDrones
 		self.tdms = tdms
 		self.mpms = mpms
 		self.start = time.time()
@@ -54,13 +55,13 @@ class Runner():
 
 		return startsList,goalsList
 
-	def run(self,taskDeligatorMode,multiplannerMethod):
+	#def run(self,taskDeligatorMode,multiplannerMethod):
 		
-		for i in range(0,self.iterations):
-			args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(taskDeligatorMode,),'mpm:=%s'%(multiplannerMethod,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
-			subprocess.check_output(args)
-			self.totalIterations += 1
-			print 'Finnished %s iteration. Method:%s,%s. Total time spent:%s'%(self.totalIterations,taskDeligatorMode,multiplannerMethod,time.time()-self.start)
+		#for i in range(0,self.iterations):
+			#args = ['roslaunch', 'aw_hector_quadrotor', 'maze3-%s.launch'%(numDrones,),'rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(taskDeligatorMode,),'mpm:=%s'%(multiplannerMethod,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
+			#subprocess.check_output(args)
+			#self.totalIterations += 1
+			#print 'Finnished %s iteration. Method:%s,%s. Total time spent:%s'%(self.totalIterations,taskDeligatorMode,multiplannerMethod,time.time()-self.start)
 			
 
 	def runAll(self):
@@ -69,7 +70,7 @@ class Runner():
 			self.logProblem(i)
 			for tdm in self.tdms:
 				for mpm in self.mpms:
-					args = ['roslaunch', 'aw_hector_quadrotor', 'maze3.launch','rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
+					args = ['roslaunch', 'aw_hector_quadrotor', 'maze3-%s.launch'%(self.numDrones,),'rviz:=1','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
 					subprocess.check_output(args)
 					self.totalIterations += 1
 					print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
@@ -83,14 +84,14 @@ class Runner():
 
 if __name__ == '__main__':
 	
-	
-	
-	runner = Runner(8,50,[0],['PP','IIHP'])
-	
-	#runner.runWith(0,'PP')
-	#runner.runWith(0,'IIHP')
-	#runner.runWith(2,'PP')
-	#runner.runWith(2,'IIHP')
+	runner = Runner(4,100,[0,2],['PP','IIHP'])
 	runner.runAll()
+	runner = Runner(6,100,[0,2],['PP','IIHP'])
+	runner.runAll()
+	runner = Runner(8,100,[0,2],['PP','IIHP'])
+	runner.runAll()
+	runner = Runner(10,100,[0,2],['PP','IIHP'])
+	runner.runAll()
+	
 	print "Python script is now finnished"
 

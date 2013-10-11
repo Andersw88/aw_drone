@@ -17,8 +17,8 @@ class Navigator
 
 public:
   Navigator() : hasGoal_(false){
-    poseSub_ = n.subscribe<nav_msgs::Odometry>("ground_truth/state", 1000, boost::bind(&Navigator::poseCallback, this, _1));
-    goalSub_ = n.subscribe<geometry_msgs::Point>("goal", 1000, boost::bind(&Navigator::goalCallback, this, _1));
+    poseSub_ = n.subscribe<nav_msgs::Odometry>("ground_truth/state", 100, boost::bind(&Navigator::poseCallback, this, _1));
+    goalSub_ = n.subscribe<geometry_msgs::Point>("goal", 100, boost::bind(&Navigator::goalCallback, this, _1));
     cmdvelPub_ = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
   }
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 
   Navigator nav;
 
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(40);
 
   int count = 0;
   while (ros::ok())

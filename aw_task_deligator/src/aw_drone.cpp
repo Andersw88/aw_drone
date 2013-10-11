@@ -101,7 +101,7 @@ bool Drone::hasGoalAndPos()
 
 bool Drone::hasPosAndMove_base()
 {
-    return ( hasPosition_ && ros::service::exists ( name_+"/move_base/make_plan",true ) );
+    return ( hasPosition_ && ros::service::exists ( name_+"/move_base/make_plan",false ) );
 }
 
 bool Drone::calcEuclidianGoalDistances ( const std::vector< std::pair< double, double > >& goals, std::vector< double >& distances )

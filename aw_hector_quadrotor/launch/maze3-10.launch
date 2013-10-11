@@ -3,13 +3,13 @@
   <arg name="tdm" default="0"/>
   <arg name="mpm" default="PP"/>
   <arg name="rviz" default="1"/>
-  <arg name="starts" default="[[10.5, 7.5], [13.5, 1.5], [9.5, 3.5], [11.5, 0.5], [5.5, 14.5], [6.5, 9.5], [4.5, 11.5], [5.5, 6.5]]"/>
-  <arg name="goals" default="[[9.5, 1.5], [1.5, 2.5], [8.5, 1.5], [12.5, 2.5], [1.5, 0.5], [7.5, 12.5], [4.5, 13.5], [9.5, 7.5]]"/>
-  <!-- <arg name="goals" default="[[5.0, 12.0],[6.0, 12.0],[9.0, 12.0],[10.0, 12.0],[5.0, 14.0],[6.0, 14.0],[9.0, 14.0],[10.0, 14.0],]"/> -->
+  <arg name="starts" default=""/>
+  <arg name="goals" default=""/>
   <arg name="run_id" default="-1"/>
 
   <rosparam param="aw/starts" subst_value="true">$(arg starts)</rosparam>
   <rosparam param="aw/goals" subst_value="true">$(arg goals)</rosparam>
+  <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6','drone7','drone8','drone9','drone10']</rosparam>
   <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
   <param name="aw/run_id" type="int" value="$(arg run_id)"/>
   <param name="aw/multiplanner/method" type="string" value="$(arg mpm)"/>
@@ -74,4 +74,17 @@
     <arg name="x" value="6.0" />
     <arg name="y" value="14.0" />
   </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone9" />
+    <arg name="x" value="7.0" />
+    <arg name="y" value="14.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone10" />
+    <arg name="x" value="7.0" />
+    <arg name="y" value="13.0" />
+  </include>
+
 </launch>

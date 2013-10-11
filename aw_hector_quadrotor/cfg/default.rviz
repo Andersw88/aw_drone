@@ -15,9 +15,9 @@ Panels:
         - /drone61/Path1
         - /drone71/Path1
         - /drone71/RobotModel1
-        - /drone81/Path1
-        - /drone81/RobotModel1
-      Splitter Ratio: 0.5
+        - /drone81
+        - /drone91/RobotModel1
+      Splitter Ratio: 0.56917
     Tree Height: 747
   - Class: rviz/Selection
     Name: Selection
@@ -305,14 +305,6 @@ Visualization Manager:
       Queue Size: 2
       Transport Hint: raw
       Value: false
-    - Alpha: 1
-      Buffer Length: 1
-      Class: rviz/Path
-      Color: 25; 255; 0
-      Enabled: false
-      Name: Path
-      Topic: /drone1/move_base/NavfnROS/plan
-      Value: false
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -465,6 +457,82 @@ Visualization Manager:
           Visual Enabled: true
       Enabled: true
       Name: drone8
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Name: Path
+          Topic: /drone9/nav_msgs/Path
+          Value: true
+        - Alpha: 1
+          Class: rviz/RobotModel
+          Collision Enabled: false
+          Enabled: true
+          Links:
+            All Links Enabled: true
+            Expand Joint Details: false
+            Expand Link Details: false
+            Expand Tree: false
+            Link Tree Style: Links in Alphabetic Order
+            base_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            sonar_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+          Name: RobotModel
+          Robot Description: drone9/robot_description
+          TF Prefix: drone9
+          Update Interval: 0
+          Value: true
+          Visual Enabled: true
+      Enabled: true
+      Name: drone9
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Name: Path
+          Topic: /drone10/nav_msgs/Path
+          Value: true
+        - Alpha: 1
+          Class: rviz/RobotModel
+          Collision Enabled: false
+          Enabled: true
+          Links:
+            All Links Enabled: true
+            Expand Joint Details: false
+            Expand Link Details: false
+            Expand Tree: false
+            Link Tree Style: Links in Alphabetic Order
+            base_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            sonar_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+          Name: RobotModel
+          Robot Description: drone10/robot_description
+          TF Prefix: drone10
+          Update Interval: 0
+          Value: true
+          Visual Enabled: true
+      Enabled: true
+      Name: drone10
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -489,17 +557,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 30.7721
+      Distance: 28.5892
       Focal Point:
-        X: 7.02456
-        Y: 7.70596
-        Z: -3.90248
+        X: 7.84838
+        Y: 7.64847
+        Z: -6.80541
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.5648
+      Pitch: 1.5448
       Target Frame: odom
       Value: Orbit (rviz)
-      Yaw: 4.72369
+      Yaw: 4.71869
     Saved: ~
 Window Geometry:
   Displays:
@@ -519,5 +587,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1248
-  X: 645
+  X: 617
   Y: 24
