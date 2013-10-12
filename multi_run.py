@@ -84,13 +84,13 @@ class Runner():
 
 if __name__ == '__main__':
 	
-	runner = Runner(4,100,[0,2],['PP','IIHP'])
+	runner = Runner(4,50,[0,1,2],['PP'])
 	runner.runAll()
-	runner = Runner(6,100,[0,2],['PP','IIHP'])
+	runner = Runner(6,50,[0,1,2],['PP'])
 	runner.runAll()
-	runner = Runner(8,100,[0,2],['PP','IIHP'])
+	runner = Runner(8,50,[0,1,2],['PP'])
 	runner.runAll()
-	runner = Runner(10,100,[0,2],['PP','IIHP'])
+	runner = Runner(10,50,[0,1,2],['PP'])
 	runner.runAll()
 	
 	print "Python script is now finnished"

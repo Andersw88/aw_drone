@@ -29,23 +29,6 @@ class TaskPlayer():
 	def __init__(self):
 		self.currentTimeStepIndex = 0
 		
-		
-		#filePath = os.path.join(os.path.dirname(__file__), 'paths.txt')
-		#with open(filePath, 'r') as content_file:
-			#dronePaths = content_file.read()
-		
-			
-		#rospy.wait_for_service('/gazebo/unpause_physics')
-		#time.sleep(10)
-
-		#try:
-			#unpause = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
-			#unpause()
-		#except rospy.ServiceException, e:
-			#print "Service call failed: %s"%e
-
-		
-			
 		droneNames = []
 		droneNames = rospy.get_param('drones', droneNames)
 		#droneNames = rospy.get_param('drones', droneNames)
@@ -65,7 +48,9 @@ class TaskPlayer():
 			
 			
 		rospy.wait_for_service('getMultiPlan')
+		startPlanTime = time.time()
 		dronePaths = self.getPlan()
+		self.planTime = time.time()-startPlanTime
 		self.success = True;
 		#print ":",dronePaths[0:2], ": <-------------------------------------------------------" 
 		if(dronePaths == '' or dronePaths[0:2] == "No"):
@@ -131,10 +116,10 @@ class TaskPlayer():
 	
 	def writeResult(self):
 		filePath = os.path.join(os.path.dirname(__file__),'../../results.csv')
-		totalTime = None
+		planExecutionTime = None
 		totalTravelDistance = None
 		if(self.success):
-			totalTime = (rospy.get_rostime() - self.start_time).secs
+			planExecutionTime = (rospy.get_rostime() - self.start_time).secs
 			totalTravelDistance = self.calculateTotalTravelDistance()
 		
 		method = rospy.get_param('aw/multiplanner/method', 'PP')
@@ -145,7 +130,7 @@ class TaskPlayer():
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 									quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			resultWrite.writerow([run_id,len(self.drones_),method,tdm,self.success,totalTime, totalTravelDistance])
+			resultWrite.writerow([run_id,len(self.drones_),method,tdm,"%.2f"%(self.planTime,),self.success,planExecutionTime, totalTravelDistance])
 	
 	
 	def update(self):
@@ -153,6 +138,11 @@ class TaskPlayer():
 		if(self.currentTimeStepIndex == 0):
 			self.start_time = rospy.get_rostime()
 			print "Start time:", self.start_time.secs
+			
+		if((rospy.get_rostime() - self.start_time).secs >= 600):
+			self.writeResult()
+			rospy.signal_shutdown("Timed out")
+			return
 
 		if(all(i['nextPoseReached'] for i in self.drones_)):
 			self.currentTimeStepIndex += 1

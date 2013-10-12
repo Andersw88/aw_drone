@@ -55,7 +55,7 @@ def multiPlannerService(req):
 	grid_step = rospy.get_param('aw/multiplanner/grid_step', 5)
 	drone_rad = rospy.get_param('aw/drone_rad', 0.5)
 	maxtime = rospy.get_param('aw/multiplanner/maxtime', 400)
-	timeout = rospy.get_param('aw/multiplanner/timeout', 100000)
+	timeout = rospy.get_param('aw/multiplanner/timeout', 600000)
 	method = rospy.get_param('aw/multiplanner/method', 'PP')
 	
 	if(not(map_name)):
