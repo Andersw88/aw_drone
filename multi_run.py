@@ -84,10 +84,10 @@ class Runner():
 
 if __name__ == '__main__':
 	
-	runner = Runner(4,50,[0,1,2],['PP'])
-	runner.runAll()
-	runner = Runner(6,50,[0,1,2],['PP'])
-	runner.runAll()
+	# runner = Runner(4,50,[0,1,2],['PP'])
+	# runner.runAll()
+	# runner = Runner(6,50,[0,1,2],['PP'])
+	# runner.runAll()
 	runner = Runner(8,50,[0,1,2],['PP'])
 	runner.runAll()
 	runner = Runner(10,50,[0,1,2],['PP'])
