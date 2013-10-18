@@ -28,7 +28,7 @@
 	
   <!-- start gazebo client -->
   <group if="$(arg gui)">
-    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false"/>
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="true"/>
   </group>
 
 </launch>
