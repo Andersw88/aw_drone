@@ -7,4 +7,4 @@ aw:
     vis: false
     map_scale: 10
     maxtime: 500
-    timeout: 100000
+    timeout: 20000
