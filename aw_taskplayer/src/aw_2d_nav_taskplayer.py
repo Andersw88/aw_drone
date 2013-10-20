@@ -27,14 +27,18 @@ import csv
 class TaskPlayer():
     
 	def __init__(self):
+		
 		self.currentTimeStepIndex = 0
 		
 		droneNames = []
 		droneNames = rospy.get_param('drones', droneNames)
 		#droneNames = rospy.get_param('drones', droneNames)
-		while(len(droneNames) == 0):
-			rospy.info("Waiting for param 'drones'")
-			time.sleep(1)
+		#timeoutTimer = time.time()
+		#while(len(droneNames) == 0):
+			#rospy.info("Waiting for param 'drones'")
+			#droneNames = rospy.get_param('drones', droneNames)
+			#time.sleep(1)
+			
 		self.goalTolerance_ = rospy.get_param('aw/goal_tolerance', droneNames)
 		multiPlannerMapScale = float(rospy.get_param('aw/multiplanner/map_scale', 10.0))
 		self.drones_ = [{} for _ in range(0,len(droneNames))]
@@ -45,9 +49,17 @@ class TaskPlayer():
 			drone['commmadPub'] = rospy.Publisher(drone['name'] + '/goal', Point)
 			drone['pathPub'] = rospy.Publisher(drone['name'] + '/nav_msgs/Path', Path)
 			
+		self.success = False
+		try:
+			rospy.wait_for_service('getMultiPlan', timeout = 60)
+		except rospy.ROSException:
+			self.start_time = rospy.get_rostime()
+			self.success = False
+			self.planTime = 0
+			self.writeResult()
+			rospy.signal_shutdown("Timed out")
+			return
 			
-			
-		rospy.wait_for_service('getMultiPlan')
 		startPlanTime = time.time()
 		dronePaths = self.getPlan()
 		self.planTime = time.time()-startPlanTime
@@ -122,15 +134,16 @@ class TaskPlayer():
 			planExecutionTime = (rospy.get_rostime() - self.start_time).secs
 			totalTravelDistance = self.calculateTotalTravelDistance()
 		
-		method = rospy.get_param('aw/multiplanner/method', 'PP')
+		method = rospy.get_param('aw/multiplanner/method', '')
 		tdm = rospy.get_param('aw/goal_deligator_mode',0)
-		run_id = rospy.get_param('aw/run_id',0)
+		run_id = rospy.get_param('aw/run_id',-1)
+		mapName = rospy.get_param('aw/map_name','')
 		
 		print filePath
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 									quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			resultWrite.writerow([run_id,len(self.drones_),method,tdm,"%.2f"%(self.planTime,),self.success,planExecutionTime, totalTravelDistance])
+			resultWrite.writerow([run_id,len(self.drones_),method,tdm,"%.2f"%(self.planTime,),self.success,planExecutionTime, totalTravelDistance,mapName])
 	
 	
 	def update(self):

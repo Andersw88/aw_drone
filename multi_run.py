@@ -8,15 +8,17 @@ import csv
 
 class Runner():
 	
-	def __init__(self,numDrones,iterations,tdms,mpms):
+	def __init__(self,numDrones,iterations,tdms,mpms,mapName):
+		self.mapName = mapName
 		self.numDrones = numDrones
+		self.maxDrones = max(numDrones)
 		self.tdms = tdms
 		self.mpms = mpms
 		self.start = time.time()
 		self.iterations = iterations
 		self.totalIterations = 0
 		
-		filePath = os.path.join(os.path.dirname(__file__),"aw_multi_solver_wrapper/src/maze3.pgm")
+		filePath = os.path.join(os.path.dirname(__file__),"aw_multi_solver_wrapper/src/%s.pgm"%mapName)
 		with open(filePath, 'r') as content_file:
 			maptext = content_file.read().split('\n')
 			
@@ -26,7 +28,7 @@ class Runner():
 		mapData = [ int(x != '0') for x in maptext[4:-1]]
 
 		self.mapData =  [mapData[i:i+self.mapSize[0]] for i in range(0, len(mapData), self.mapSize[0])]
-		self.starts,self.goals = self.genStartsAndGoals(numDrones)
+		self.starts,self.goals = self.genStartsAndGoals(self.maxDrones)
 		#print self.goals
 
 		
@@ -65,16 +67,17 @@ class Runner():
 			
 
 	def runAll(self):
-		
+		#pprint (self.numDrones)
 		for i in range(0,self.iterations):
 			self.logProblem(i)
-			for tdm in self.tdms:
-				for mpm in self.mpms:
-					args = ['roslaunch', 'aw_hector_quadrotor', 'maze3-%s.launch'%(self.numDrones,),'rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i],),'goals:=%s'%(self.goals[i],)]
-					subprocess.check_output(args)
-					self.totalIterations += 1
-					print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
-	
+			for droneCount in self.numDrones:
+				for tdm in self.tdms:
+					for mpm in self.mpms:
+						args = ['roslaunch', 'aw_hector_quadrotor', '%s-%s.launch'%(self.mapName,droneCount,),'rviz:=0','run_id:=%s'%(i,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
+						subprocess.check_output(args)
+						self.totalIterations += 1
+						print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
+		
 	def logProblem(self,i):
 		filePath = os.path.join(os.path.dirname(__file__),'problem_setups.csv')
 		with open(filePath, 'a') as csvfile:
@@ -84,14 +87,14 @@ class Runner():
 
 if __name__ == '__main__':
 	
-	# runner = Runner(4,50,[0,1,2],['PP'])
-	# runner.runAll()
-	# runner = Runner(6,50,[0,1,2],['PP'])
-	# runner.runAll()
-	runner = Runner(8,50,[0,1,2],['PP'])
+	runner = Runner([4,6,8,10],50,[0,1,2],['PP'],'maze3')
 	runner.runAll()
-	runner = Runner(10,50,[0,1,2],['PP'])
-	runner.runAll()
+	#runner = Runner(6,50,[0,1,2],['PP'])
+	#runner.runAll()
+	#runner = Runner(8,50,[0,1,2],['PP'])
+	#runner.runAll()
+	#runner = Runner(10,50,[0,1,2],['PP'])
+	#runner.runAll()
 	
 	print "Python script is now finnished"
 
