@@ -21,6 +21,8 @@ import os,subprocess
 import time
 import csv
 
+import sqlite3
+
 
 
 
@@ -51,7 +53,7 @@ class TaskPlayer():
 			
 		self.success = False
 		try:
-			rospy.wait_for_service('getMultiPlan', timeout = 60)
+			rospy.wait_for_service('getMultiPlan', timeout = 600)
 		except rospy.ROSException:
 			self.start_time = rospy.get_rostime()
 			self.success = False
@@ -139,11 +141,23 @@ class TaskPlayer():
 		run_id = rospy.get_param('aw/run_id',-1)
 		mapName = rospy.get_param('aw/map_name','')
 		
+		
 		print filePath
+		
+		runData = (run_id,len(self.drones_),method,tdm,"%.2f"%(self.planTime,),self.success,planExecutionTime, totalTravelDistance,mapName)
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 									quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			resultWrite.writerow([run_id,len(self.drones_),method,tdm,"%.2f"%(self.planTime,),self.success,planExecutionTime, totalTravelDistance,mapName])
+			resultWrite.writerow(runData)
+		
+		dbPath = os.path.join(os.path.dirname(__file__),'../../results.sqlite')
+		conn = sqlite3.connect(dbPath)
+		c = conn.cursor()
+		c.execute("""INSERT INTO runs 
+					(problem_id, num_drones, mpm,tdm, plan_time, plan_success,plan_execution_time,total_travel_distance,map_name) 
+					VALUES (?,?,?,?,?,?,?,?,?)""",runData)
+		conn.commit()
+		c.close()
 	
 	
 	def update(self):
@@ -175,10 +189,6 @@ class TaskPlayer():
 		drone['position'][0] = msg.pose.pose.position.x
 		drone['position'][1] = msg.pose.pose.position.y
 		
-		#if(drone['referenceSet'] == False):
-			#drone['commmadPub'].publish(String("c setReference %f %f 1.0 1.57"%(drone['position'][0],drone['position'][1])) )
-			#drone['referenceSet'] = True
-			
 		if(((drone['currentGoal'][0] - drone['position'][0])**2 + 
 			(drone['currentGoal'][1] - drone['position'][1])**2)**0.5  < self.goalTolerance_ and not drone['nextPoseReached']):
 			rospy.logdebug(drone['name'] + " reached step %f %f,timestep: %i" %(drone['currentGoal'][0],drone['currentGoal'][1],self.timeSteps[self.currentTimeStepIndex]))
@@ -187,10 +197,8 @@ class TaskPlayer():
 	
 	def calculateTotalTravelDistance(self):
 		
-		#pprint(self.timeSteps)
 		distSum = 0
 		for drone in self.drones_:
-			#pprint(drone['path'])
 			for i in range(0,len(self.timeSteps)-1):
 				if(self.timeSteps[i] in drone['path'] and self.timeSteps[i+1] in drone['path']):
 					distSum += ((drone['path'][self.timeSteps[i+1]][0] - drone['path'][self.timeSteps[i]][0])**2 + (drone['path'][self.timeSteps[i+1]][1] - drone['path'][self.timeSteps[i]][1])**2)**0.5

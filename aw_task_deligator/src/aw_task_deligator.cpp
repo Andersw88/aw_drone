@@ -23,19 +23,21 @@ int main ( int argc, char **argv )
 
     int deligatorMode = -1;
     double goalTolerance = 0.5;
+	bool isLive = false;
 
     XmlRpc::XmlRpcValue Xdrones;
     XmlRpc::XmlRpcValue Xgoals;
     XmlRpc::XmlRpcValue Xstarts;
     XmlRpc::XmlRpcValue xDeligatorMode;
     XmlRpc::XmlRpcValue xGoalTolerance;
-
-    bool live = false;
+	XmlRpc::XmlRpcValue xLive;
+    
 
 
 
     n.getParam ( "aw/goal_deligator_mode", xDeligatorMode );
     n.getParam ( "aw/goal_tolerance", xGoalTolerance );
+	n.getParam ( "aw/live", xLive );
 
 //     if ( !Xdrones.valid() ) {
 //         ROS_FATAL ( "Invalid drones param" );
@@ -61,6 +63,13 @@ int main ( int argc, char **argv )
         ROS_WARN ( "Invalid aw/goal_deligator_mode param. Defaulting to Hungarian" );
         deligatorMode = 0;
     }
+	if ( xLive.valid() && xLive.getType() ==  XmlRpc::XmlRpcValue::TypeBoolean ) {
+        isLive  = static_cast<bool> ( xLive );
+    } else {
+        ROS_WARN ( "Invalid aw/live param.Defaulting to false" );
+        isLive = 0;
+    }
+
 
     if ( xGoalTolerance.valid() && xGoalTolerance.getType() ==  XmlRpc::XmlRpcValue::TypeDouble ) {
         goalTolerance  = static_cast<double> ( xGoalTolerance );
@@ -105,7 +114,7 @@ int main ( int argc, char **argv )
         }
         sleep ( 1 );
     }
-    if ( !live && starts.size() == drones.size() )	{
+    if ( !isLive && starts.size() == drones.size() )	{
         ros::ServiceClient pause = n.serviceClient<std_srvs::Empty> ( "/gazebo/pause_physics" );
         std_srvs::Empty srv;
         if ( pause.call ( srv ) ) {
