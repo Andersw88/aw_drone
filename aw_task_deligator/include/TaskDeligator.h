@@ -48,4 +48,11 @@ public:
     ThresholdPlusHungarianTask ( std::vector< boost::shared_ptr< Drone > > drones, std::vector< std::pair< double, double > > tasks );
     virtual bool allocTasksToDrones();
 };
+
+class GreedyFirst : public TaskDeligator
+{
+public:
+    GreedyFirst ( std::vector< boost::shared_ptr< Drone > > drones, std::vector< std::pair< double, double > > tasks );
+    virtual bool allocTasksToDrones();
+};
 #endif

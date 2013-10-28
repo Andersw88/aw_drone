@@ -145,6 +145,9 @@ int main ( int argc, char **argv )
     case 2:
         taskAlloc = new ThresholdPlusHungarianTask ( drones,tasks );
         break;
+	case 3:
+        taskAlloc = new GreedyFirst ( drones,tasks );
+        break;
     default:
         ROS_WARN ( "Deligator mode %d is not a valid mode. Hungarian = 0, Random = 1. Defaulting to Hungarian", deligatorMode );
         taskAlloc = new HungarianTask ( drones,tasks );
