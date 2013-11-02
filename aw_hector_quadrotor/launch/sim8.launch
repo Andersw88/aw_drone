@@ -3,24 +3,26 @@
   <arg name="tdm" default="0"/>
   <arg name="mpm" default="PP"/>
   <arg name="rviz" default="1"/>
-  <arg name="starts" default=""/>
-  <arg name="goals" default=""/>
+  <arg name="starts" default="[[10.5, 7.5], [13.5, 1.5], [9.5, 3.5], [11.5, 0.5], [5.5, 14.5], [6.5, 9.5], [4.5, 11.5], [5.5, 6.5]]"/>
+  <arg name="goals" default="[[9.5, 1.5], [1.5, 2.5], [8.5, 1.5], [12.5, 2.5], [1.5, 0.5], [7.5, 12.5], [4.5, 13.5], [9.5, 7.5]]"/>
   <arg name="run_id" default="-1"/>
+  <arg name="map_name" default="maze3"/>
 
   <rosparam param="aw/starts" subst_value="true">$(arg starts)</rosparam>
   <rosparam param="aw/goals" subst_value="true">$(arg goals)</rosparam>
-  <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6','drone7','drone8','drone9','drone10']</rosparam>
+  <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6','drone7','drone8']</rosparam>
   <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
   <param name="aw/run_id" type="int" value="$(arg run_id)"/>
   <param name="aw/multiplanner/method" type="string" value="$(arg mpm)"/>
-  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze3.yaml" />
 
+  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/$(arg map_name).yaml" />
+  <param name="aw/map_name" value="$(arg map_name)"/>
 
   <include file="$(find aw_hector_quadrotor)/launch/map.launch">
-    <arg name="map_name" value="maze3" />
+    <arg name="map_name" value="$(arg map_name)" />
   </include>
   <include file="$(find aw_hector_quadrotor)/launch/common.launch" >
-     <arg name="rviz" value="$(arg rviz)" />
+    <arg name="rviz" value="$(arg rviz)" />
   </include>
 
   <!-- <node name="aw_ascii_pgm_to_random_init" type="aw_ascii_pgm_to_random_init.py" pkg="aw_multi_solver_wrapper" output="screen"/> -->
@@ -74,17 +76,4 @@
     <arg name="x" value="6.0" />
     <arg name="y" value="14.0" />
   </include>
-
-  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
-    <arg name="name" value="drone9" />
-    <arg name="x" value="7.0" />
-    <arg name="y" value="14.0" />
-  </include>
-
-  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
-    <arg name="name" value="drone10" />
-    <arg name="x" value="7.0" />
-    <arg name="y" value="13.0" />
-  </include>
-
 </launch>

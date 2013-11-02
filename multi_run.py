@@ -106,7 +106,7 @@ def createSQLiteDB():
 if __name__ == '__main__':
 	createSQLiteDB()
 	
-	runner = Runner([4],1,[0,2,3],['PP'],'liuB')
+	runner = Runner([4,6,8,10],100,[0,2,3],['PP'],'liuB2')
 	runner.runAll()
 	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
 	#runner.runAll()

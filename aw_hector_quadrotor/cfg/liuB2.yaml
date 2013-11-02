@@ -1,0 +1,10 @@
+aw:
+  live: false
+  drone_rad: 0.4
+  goal_tolerance: 0.4
+  multiplanner:
+    vis: false
+    map_scale: 10
+    grid_step: 10
+    maxtime: 1000
+    timeout: 200000

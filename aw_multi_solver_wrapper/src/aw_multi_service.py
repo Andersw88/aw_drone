@@ -67,7 +67,7 @@ def multiPlannerService(req):
 								'showvis': multiplanner_vis,
 								'maxtime': maxtime,
 								'gridStep': grid_step,
-								'mission':[ {'startX':int(round(objectives.starts[i].x*multiplanner_map_scale/grid_step)*grid_step),'startY':int(round(objectives.starts[i].y*multiplanner_map_scale/grid_step)*grid_step),
+								'mission':[ {'startX':int(round(objectives.starts[i].x*multiplanner_map_scale/(5))*(5)),'startY':int(round(objectives.starts[i].y*multiplanner_map_scale/(5))*(5)),
 											  'targetX':int(objectives.targets[i].x*multiplanner_map_scale),'targetY':int(objectives.targets[i].y*multiplanner_map_scale),
 											  'rad':drone_rad*multiplanner_map_scale,
 											  'maxSpeed':1} for i in range(len(objectives.starts))]

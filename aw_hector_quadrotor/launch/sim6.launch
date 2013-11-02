@@ -3,21 +3,23 @@
   <arg name="tdm" default="0"/>
   <arg name="mpm" default="PP"/>
   <arg name="rviz" default="1"/>
-  <arg name="starts" default="[[10.5, 7.5], [13.5, 1.5], [9.5, 3.5], [11.5, 0.5]]"/>
-  <arg name="goals" default="[[9.5, 1.5], [1.5, 2.5], [8.5, 1.5], [12.5, 2.5]]"/>
+  <arg name="starts" default="[[10.5, 7.5], [13.5, 1.5], [9.5, 3.5], [11.5, 0.5], [5.5, 14.5], [6.5, 9.5]]"/>
+  <arg name="goals" default="[[9.5, 1.5], [1.5, 2.5], [8.5, 1.5], [12.5, 2.5], [1.5, 0.5], [7.5, 12.5]]"/>
   <arg name="run_id" default="-1"/>
+  <arg name="map_name" default="maze3"/>
 
   <rosparam param="aw/starts" subst_value="true">$(arg starts)</rosparam>
   <rosparam param="aw/goals" subst_value="true">$(arg goals)</rosparam>
-  <rosparam param="drones">['drone1','drone2','drone3','drone4']</rosparam>
+  <rosparam param="drones">['drone1','drone2','drone3','drone4','drone5','drone6']</rosparam>
   <param name="aw/goal_deligator_mode" type="int" value="$(arg tdm)"/>
   <param name="aw/run_id" type="int" value="$(arg run_id)"/>
   <param name="aw/multiplanner/method" type="string" value="$(arg mpm)"/>
-  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/maze4.yaml" />
 
+  <rosparam command="load" file="$(find aw_hector_quadrotor)/cfg/$(arg map_name).yaml" />
+  <param name="aw/map_name" value="$(arg map_name)"/>
 
   <include file="$(find aw_hector_quadrotor)/launch/map.launch">
-    <arg name="map_name" value="maze4" />
+    <arg name="map_name" value="$(arg map_name)" />
   </include>
   <include file="$(find aw_hector_quadrotor)/launch/common.launch" >
      <arg name="rviz" value="$(arg rviz)" />
@@ -49,6 +51,18 @@
     <arg name="name" value="drone4" />
     <arg name="x" value="5.0" />
     <arg name="y" value="12.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone5" />
+    <arg name="x" value="12.0" />
+    <arg name="y" value="1.0" />
+  </include>
+
+  <include file="$(find aw_hector_quadrotor)/launch/spawn_quadrotor.launch">
+    <arg name="name" value="drone6" />
+    <arg name="x" value="14.0" />
+    <arg name="y" value="1.0" />
   </include>
 
 </launch>
