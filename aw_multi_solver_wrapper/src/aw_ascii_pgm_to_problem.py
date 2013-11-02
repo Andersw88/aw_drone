@@ -28,7 +28,7 @@ if __name__ == '__main__':
 			for j in range(0,mapSize[1]):
 				if(mapData[i+j*mapSize[0]] == "0"):
 					x = i*scale
-					y = (mapSize[0]-j)*scale
+					y = (mapSize[1]-j)*scale
 					#y = j*scale
 					
 					print """<obstacle>
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         <x>%s</x>
         <y>%s</y>
       </point>
-    </bounds>""" %(mapSize[0]*scale,mapSize[0]*scale)
+    </bounds>""" %(mapSize[0]*scale,mapSize[1]*scale)
     
 print """</environment>
   <agents/>

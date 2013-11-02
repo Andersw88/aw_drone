@@ -64,7 +64,7 @@ class Runner():
 			for droneCount in self.numDrones:
 				for tdm in self.tdms:
 					for mpm in self.mpms:
-						args = ['roslaunch', 'aw_hector_quadrotor', '%s-%s.launch'%(self.mapName,droneCount,),'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
+						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
 						subprocess.check_output(args)
 						self.totalIterations += 1
 						print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
@@ -106,10 +106,10 @@ def createSQLiteDB():
 if __name__ == '__main__':
 	createSQLiteDB()
 	
-	runner = Runner([4,6,8,10],50,[0,2,3],['PP'],'maze4')
+	runner = Runner([4],1,[0,2,3],['PP'],'liuB')
 	runner.runAll()
-	runner = Runner([4,6,8,10],50,[0,2,3],['PP'],'maze3')
-	runner.runAll()
+	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
+	#runner.runAll()
 	#runner = Runner(8,50,[0,1,2],['PP'])
 	#runner.runAll()
 	#runner = Runner(10,50,[0,1,2],['PP'])
