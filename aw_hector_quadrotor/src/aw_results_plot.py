@@ -70,11 +70,11 @@ def makeBarPlot(title,labels,means,stds,autolabeler):
 	pylab.xticks(range(len(means)),labels)
 	autolabeler(rects)
 	
-def mean_confidence_interval(data, confidence=0.95):
+def mean_confidence_interval(data, confidence=0.95,pdist = stats.t):
 	a = 1.0*numpy.array(data)
 	n = len(a)
 	m, se = numpy.mean(a), stats.sem(a)
-	h = se * stats.weibull_min._ppf((1+confidence)/2., n-1)
+	h = se * pdist._ppf((1+confidence)/2., n-1)
 	return h
 	
 	
@@ -90,20 +90,91 @@ def plotTimeAndDistanceP(map_name,figNameT = None,figNameD = None):
 	
 	result = sq.c.fetchall()
 	droneNrs = [4,6,8,10]
-	means = [[numpy.mean([x[2]/x[6] for x in result if x[0] == n]),numpy.mean([x[4]/x[6] for x in result if x[0] == n]),numpy.mean([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
-	ci = [[mean_confidence_interval([x[2]/x[6] for x in result if x[0] == n]),mean_confidence_interval([x[4]/x[6] for x in result if x[0] == n]),mean_confidence_interval([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
+	pdist = stats.weibull_min
+	means = [[numpy.mean([x[2]/x[6] for x in result if x[0] == n]),
+			numpy.mean([x[4]/x[6] for x in result if x[0] == n]),
+			numpy.mean([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
+			
+	ci = [[mean_confidence_interval([x[2]/x[6] for x in result if x[0] == n]),
+			mean_confidence_interval([x[4]/x[6] for x in result if x[0] == n]),
+			mean_confidence_interval([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
 	#stds =  [[numpy.std([x[2]/x[6] for x in result if x[0] == n]),numpy.std([x[4]/x[6] for x in result if x[0] == n]),numpy.std([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
+	makeBarPlot("Distance",droneNrs,means,ci,autolabelP)
+	if(figNameD):
+		pylab.savefig(figNameD,bbox_inches='tight')
+		
+	means = [[numpy.mean([x[1]/x[5] for x in result if x[0] == n]),
+			numpy.mean([x[3]/x[5] for x in result if x[0] == n]),
+			numpy.mean([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
+			
+	ci = [[mean_confidence_interval([x[1]/x[5] for x in result if x[0] == n]),
+			mean_confidence_interval([x[3]/x[5] for x in result if x[0] == n]),
+			mean_confidence_interval([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
+			
+	#stds =  [[numpy.std([x[1]/x[5] for x in result if x[0] == n]),numpy.std([x[3]/x[5] for x in result if x[0] == n]),numpy.std([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
 	makeBarPlot("Time",droneNrs,means,ci,autolabelP)
 	if(figNameT):
 		pylab.savefig(figNameT,bbox_inches='tight')
+		
+def plotTimeAndDistanceD(map_name,figNameT = None,figNameD = None):
+	sq.c.execute('''SELECT runH.num_drones,runH.plan_execution_time,runH.total_travel_distance,runT.plan_execution_time,runT.total_travel_distance,runG.plan_execution_time,runG.total_travel_distance 
+				FROM problem_setups ps 
+				JOIN runs as runH ON runH.problem_id = ps.id AND runH.tdm = 0 
+				JOIN runs as runT ON runT.problem_id = ps.id AND runT.tdm = 2
+				JOIN runs as runG ON runG.problem_id = ps.id AND runG.tdm = 3
+				WHERE ps.map_name = "%s"
+				AND runH.plan_success = 1 AND runT.plan_success = 1 AND runG.plan_success = 1
+				AND runH.num_drones = runT.num_drones AND runH.num_drones = runG.num_drones'''%map_name)
 	
-	means = [[numpy.mean([x[1]/x[5] for x in result if x[0] == n]),numpy.mean([x[3]/x[5] for x in result if x[0] == n]),numpy.mean([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
-	ci = [[mean_confidence_interval([x[1]/x[5] for x in result if x[0] == n]),mean_confidence_interval([x[3]/x[5] for x in result if x[0] == n]),mean_confidence_interval([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
-	#stds =  [[numpy.std([x[1]/x[5] for x in result if x[0] == n]),numpy.std([x[3]/x[5] for x in result if x[0] == n]),numpy.std([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Time",droneNrs,means,ci,autolabelP)
-	
+	result = sq.c.fetchall()
+	droneNrs = [4,6,8,10]
+	means = [[numpy.mean([x[2] for x in result if x[0] == n]),
+			numpy.mean([x[4] for x in result if x[0] == n]),
+			numpy.mean([x[6] for x in result if x[0] == n])] for n in droneNrs]
+			
+	ci = [[mean_confidence_interval([x[2] for x in result if x[0] == n]),
+			mean_confidence_interval([x[4] for x in result if x[0] == n]),
+			mean_confidence_interval([x[6] for x in result if x[0] == n])] for n in droneNrs]
+	#stds =  [[numpy.std([x[2]/x[6] for x in result if x[0] == n]),numpy.std([x[4]/x[6] for x in result if x[0] == n]),numpy.std([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
+	makeBarPlot("Distance",droneNrs,means,ci,autolabelD)
 	if(figNameD):
 		pylab.savefig(figNameD,bbox_inches='tight')
+		
+	means = [[numpy.mean([x[1] for x in result if x[0] == n]),
+			numpy.mean([x[3] for x in result if x[0] == n]),
+			numpy.mean([x[5] for x in result if x[0] == n])] for n in droneNrs]
+			
+	ci = [[mean_confidence_interval([x[1] for x in result if x[0] == n]),
+			mean_confidence_interval([x[3] for x in result if x[0] == n]),
+			mean_confidence_interval([x[5] for x in result if x[0] == n])] for n in droneNrs]
+	#stds =  [[numpy.std([x[1]/x[5] for x in result if x[0] == n]),numpy.std([x[3]/x[5] for x in result if x[0] == n]),numpy.std([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
+	makeBarPlot("Time",droneNrs,means,ci,autolabelD)
+	if(figNameT):
+		pylab.savefig(figNameT,bbox_inches='tight')
+		
+def plotHist(map_name,figNameT = None,figNameD = None):
+	sq.c.execute('''SELECT runH.num_drones,runH.plan_execution_time,runH.total_travel_distance,runT.plan_execution_time,runT.total_travel_distance,runG.plan_execution_time,runG.total_travel_distance 
+				FROM problem_setups ps 
+				JOIN runs as runH ON runH.problem_id = ps.id AND runH.tdm = 0 
+				JOIN runs as runT ON runT.problem_id = ps.id AND runT.tdm = 2
+				JOIN runs as runG ON runG.problem_id = ps.id AND runG.tdm = 3
+				WHERE ps.map_name = "%s"
+				AND runH.plan_success = 1 AND runT.plan_success = 1 AND runG.plan_success = 1
+				AND runH.num_drones = runT.num_drones AND runH.num_drones = runG.num_drones'''%map_name)
+	
+	result = sq.c.fetchall()
+	droneNrs = [4,6,8,10]
+	pylab.figure()
+	pylab.title("%s:Hist of timeP"%map_name)
+	pylab.hist([x[2]/x[6] for x in result if x[0] == 4],20)
+	pylab.figure()
+	pylab.title("%s:Hist of time"%map_name)
+	pylab.hist([x[2] for x in result if x[0] == 4],20)
+	
+	pylab.figure()
+	pylab.title("%s:Hist of time"%map_name)
+	pylab.hist([x[6] for x in result if x[0] == 4],20)
+
 	
 def plotSuccessP(map_name,figName = None):
 	sq.c.execute('''SELECT (SELECT COUNT(*) from runs WHERE map_name = "%s" GROUP BY num_drones,tdm),COUNT(*) FROM runs WHERE plan_success = 1 AND map_name = "%s" GROUP BY num_drones,tdm'''%(map_name,map_name))
@@ -125,13 +196,17 @@ def plotSuccessP(map_name,figName = None):
 if __name__ == '__main__':
 	sq = SqliteInteface('../../results-current.sqlite')
 
-	plotSuccessP("maze3","maze3_success.pdf")
-	plotSuccessP("maze4","maze4_success.pdf")
+	#plotSuccessP("maze3","maze3_success.pdf")
+	#plotSuccessP("maze4","maze4_success.pdf")
+	#plotSuccessP("liuB2","liuB2_success.pdf")
 	
-	plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_dist.pdf")
-	plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_dist.pdf")
+	#plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
+	#plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
+	#plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
 	
-	#pylab.show()
+	#plotTimeAndDistanceD("liuB2")
+	plotHist("liuB2")
+	pylab.show()
 	
 	
 	
