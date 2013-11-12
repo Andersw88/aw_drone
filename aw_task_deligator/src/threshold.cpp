@@ -195,8 +195,8 @@ std::vector<int> ThresholdAlgorithm::solve(Matrix<double> &m) {
 	double cost = costH;
 	bool lowBound = true;
 	double median;
-	double prevThreshold = -1;
-	while(costL < cost || cost < costH)
+	double prevThreshold = -1; 
+	while(costL < cost || cost < costH) //This implementation is kind of messed up but it works good enough.
 	{
 
 		setMatixZerosBelowThreshold(costL);

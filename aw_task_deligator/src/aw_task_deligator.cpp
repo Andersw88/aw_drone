@@ -114,7 +114,7 @@ int main ( int argc, char **argv )
         }
         sleep ( 1 );
     }
-    if ( !isLive && starts.size() == drones.size() )	{
+    if ( !isLive && starts.size() >= drones.size() )	{
         ros::ServiceClient pause = n.serviceClient<std_srvs::Empty> ( "/gazebo/pause_physics" );
         std_srvs::Empty srv;
         if ( pause.call ( srv ) ) {

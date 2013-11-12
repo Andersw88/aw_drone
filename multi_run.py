@@ -9,15 +9,16 @@ import sqlite3
 
 class Runner():
 	
-	def __init__(self,numDrones,iterations,tdms,mpms,mapName):
+	def __init__(self,numDrones,iterations,tdms,mpms,mapName,genStarts = False):
 		self.mapName = mapName
 		self.numDrones = numDrones
 		self.maxDrones = max(numDrones)
 		self.tdms = tdms
 		self.mpms = mpms
-		self.start = time.time()
+		self.startTime = time.time()
 		self.iterations = iterations
 		self.totalIterations = 0
+		#self.starts = starts
 		
 		filePath = os.path.join(os.path.dirname(__file__),"aw_multi_solver_wrapper/src/%s.pgm"%mapName)
 		with open(filePath, 'r') as content_file:
@@ -30,7 +31,12 @@ class Runner():
 		mapData = [ int(x != '0') for x in maptext[4:-1]]
 
 		self.mapData =  [mapData[i:i+self.mapSize[0]] for i in range(0, len(mapData), self.mapSize[0])]
-		self.starts,self.goals = self.genStartsAndGoals(self.maxDrones)
+		if(genStarts):
+			self.starts,self.goals = self.genStartsAndGoals(self.maxDrones)
+		else:
+			self.starts = None
+			self.goals = self.genGoals(self.maxDrones)
+
 		#print self.goals
 
 		
@@ -56,6 +62,21 @@ class Runner():
 					starts.add(start)
 			startsList.append([[start[0],start[1]] for start in starts])
 		return startsList,goalsList
+		
+	def genGoals(self,numDrones):
+		goalsList = []
+		
+		#startsSet = set(self.starts)
+		for i in range(0,self.iterations):
+			goals = set()
+			while(len(goals) < numDrones):
+				x = int(random()*(self.mapSize[0]))
+				y = int(random()*(self.mapSize[1]))
+				goalT = tuple((x+0.5,self.mapSize[1]-y-0.5))
+				if(self.mapData[y][x] != 0):
+					goals.add(goalT)
+			goalsList.append([[goal[0],goal[1]] for goal in goals])
+		return goalsList	
 
 	def runAll(self):
 		#pprint (self.numDrones)
@@ -64,19 +85,45 @@ class Runner():
 			for droneCount in self.numDrones:
 				for tdm in self.tdms:
 					for mpm in self.mpms:
-						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
+						
+						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'goals:=%s'%(self.goals[i][0:droneCount],)]
+						if(self.starts):
+							args.append('starts:=%s'%(self.starts[i][0:droneCount],))
+						
 						subprocess.check_output(args)
 						self.totalIterations += 1
-						print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.start)
-		
+						print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.startTime)
+						
+	#def runAllWithoutStarts(self):
+		#self.starts = None
+		#for i in range(0,self.iterations):
+			#run_id = self.logProblem(i)
+			#for droneCount in self.numDrones:
+				#for tdm in self.tdms:
+					#for mpm in self.mpms:
+						#args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
+						#subprocess.check_output(args)
+						#self.totalIterations += 1
+						#print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.startTime)
+
+						
 	def logProblem(self,i):
 		filePath = os.path.join(os.path.dirname(__file__),'problem_setups.csv')
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 			quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			resultWrite.writerow([i,self.starts[i],self.goals[i]])
-			
-		problemData = (', '.join([str(x) for x in self.starts[i]]),', '.join([str(x) for x in self.goals[i]]),self.mapName)
+			if self.starts:
+				startI = self.starts[i]
+			else:
+				startI = starts = ""
+			resultWrite.writerow([i,startI,self.goals[i]])
+		
+		if self.starts:
+			problemData = (', '.join([str(x) for x in self.starts[i]]),', '.join([str(x) for x in self.goals[i]]),self.mapName)
+		else:
+			problemData = ('',', '.join([str(x) for x in self.goals[i]]),self.mapName)
+		#problemData = (', '.join([str(x) for x in self.starts[i]]),', '.join([str(x) for x in self.goals[i]]),self.mapName)
+		#print problemData
 		#print problemData
 		conn = sqlite3.connect('results.sqlite')
 		c = conn.cursor()
@@ -106,14 +153,11 @@ def createSQLiteDB():
 if __name__ == '__main__':
 	createSQLiteDB()
 	
-	runner = Runner([4,6,8,10],100,[0,2,3],['PP'],'liuB2')
+	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze5',genStarts=False)
+	#runner.runAll()
+	runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
 	runner.runAll()
-	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
-	#runner.runAll()
-	#runner = Runner(8,50,[0,1,2],['PP'])
-	#runner.runAll()
-	#runner = Runner(10,50,[0,1,2],['PP'])
-	#runner.runAll()
+
 	
 	print "Python script is now finnished"
 
