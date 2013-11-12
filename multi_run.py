@@ -153,10 +153,10 @@ def createSQLiteDB():
 if __name__ == '__main__':
 	createSQLiteDB()
 	
-	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze5',genStarts=False)
-	#runner.runAll()
-	runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
+	runner = Runner([4,6,8,10],100,[0,2,3],['PP'],'maze5',genStarts=False)
 	runner.runAll()
+	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
+	#runner.runAll()
 
 	
 	print "Python script is now finnished"
