@@ -86,7 +86,7 @@ class Runner():
 				for tdm in self.tdms:
 					for mpm in self.mpms:
 						
-						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'goals:=%s'%(self.goals[i][0:droneCount],)]
+						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=0','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'goals:=%s'%(self.goals[i][0:droneCount],)]
 						if(self.starts):
 							args.append('starts:=%s'%(self.starts[i][0:droneCount],))
 						
