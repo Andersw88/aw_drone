@@ -9,7 +9,7 @@ import sqlite3
 
 class Runner():
 	
-	def __init__(self,numDrones,iterations,tdms,mpms,mapName,genStarts = False):
+	def __init__(self,numDrones,iterations,tdms,mpms,mapName,start = None):
 		self.mapName = mapName
 		self.numDrones = numDrones
 		self.maxDrones = max(numDrones)
@@ -31,13 +31,14 @@ class Runner():
 		mapData = [ int(x != '0') for x in maptext[4:-1]]
 
 		self.mapData =  [mapData[i:i+self.mapSize[0]] for i in range(0, len(mapData), self.mapSize[0])]
-		if(genStarts):
+		if(not start):
 			self.starts,self.goals = self.genStartsAndGoals(self.maxDrones)
 		else:
-			self.starts = None
+			self.starts =  [start for i in range(iterations)]
 			self.goals = self.genGoals(self.maxDrones)
 
 		#print self.goals
+		#print self.starts
 
 		
 	def genStartsAndGoals(self,numDrones):
@@ -65,15 +66,15 @@ class Runner():
 		
 	def genGoals(self,numDrones):
 		goalsList = []
-		
-		#startsSet = set(self.starts)
+		startsSet = set((start[0][0],start[0][1]) for start in self.starts)
+		#print startsSet
 		for i in range(0,self.iterations):
 			goals = set()
 			while(len(goals) < numDrones):
 				x = int(random()*(self.mapSize[0]))
 				y = int(random()*(self.mapSize[1]))
 				goalT = tuple((x+0.5,self.mapSize[1]-y-0.5))
-				if(self.mapData[y][x] != 0):
+				if(self.mapData[y][x] != 0 and not(goalT in startsSet)):
 					goals.add(goalT)
 			goalsList.append([[goal[0],goal[1]] for goal in goals])
 		return goalsList	
@@ -86,45 +87,20 @@ class Runner():
 				for tdm in self.tdms:
 					for mpm in self.mpms:
 						
-						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=0','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'goals:=%s'%(self.goals[i][0:droneCount],)]
-						if(self.starts):
-							args.append('starts:=%s'%(self.starts[i][0:droneCount],))
-						
+						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=0','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
 						subprocess.check_output(args)
 						self.totalIterations += 1
 						print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.startTime)
 						
-	#def runAllWithoutStarts(self):
-		#self.starts = None
-		#for i in range(0,self.iterations):
-			#run_id = self.logProblem(i)
-			#for droneCount in self.numDrones:
-				#for tdm in self.tdms:
-					#for mpm in self.mpms:
-						#args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%(self.starts[i][0:droneCount],),'goals:=%s'%(self.goals[i][0:droneCount],)]
-						#subprocess.check_output(args)
-						#self.totalIterations += 1
-						#print 'Finnished iteration %s, total runs %s. Method:%s,%s. Total time spent:%s'%(i,self.totalIterations,tdm,mpm,time.time()-self.startTime)
-
 						
 	def logProblem(self,i):
 		filePath = os.path.join(os.path.dirname(__file__),'problem_setups.csv')
 		with open(filePath, 'a') as csvfile:
 			resultWrite = csv.writer(csvfile, delimiter=',',
 			quotechar='|', quoting=csv.QUOTE_MINIMAL)
-			if self.starts:
-				startI = self.starts[i]
-			else:
-				startI = starts = ""
-			resultWrite.writerow([i,startI,self.goals[i]])
+			resultWrite.writerow([i,self.starts[i],self.goals[i]])
 		
-		if self.starts:
-			problemData = (', '.join([str(x) for x in self.starts[i]]),', '.join([str(x) for x in self.goals[i]]),self.mapName)
-		else:
-			problemData = ('',', '.join([str(x) for x in self.goals[i]]),self.mapName)
-		#problemData = (', '.join([str(x) for x in self.starts[i]]),', '.join([str(x) for x in self.goals[i]]),self.mapName)
-		#print problemData
-		#print problemData
+		problemData = (', '.join([str(x) for x in self.starts[i]]),', '.join([str(x) for x in self.goals[i]]),self.mapName)
 		conn = sqlite3.connect('results.sqlite')
 		c = conn.cursor()
 		c.execute("INSERT INTO problem_setups (starts,goals,map_name) VALUES (?,?,?)",problemData)
@@ -153,7 +129,7 @@ def createSQLiteDB():
 if __name__ == '__main__':
 	createSQLiteDB()
 	
-	runner = Runner([4,6,8,10],100,[0,2,3],['PP'],'maze5',genStarts=False)
+	runner = Runner([4,6,8,10],100,[0,2,3],['PP'],'maze5',start= [[0.5, 0.5], [2.5, 0.5], [4.5, 0.5], [0.5, 2.5], [2.5, 2.5], [4.5, 2.5],[3.5, 3.5], [4.5, 4.5], [2.5, 4.5], [0.5, 4.5]])
 	runner.runAll()
 	#runner = Runner([4,6,8,10],1,[0,2,3],['PP'],'maze3')
 	#runner.runAll()
