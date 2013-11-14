@@ -15,6 +15,9 @@ class SqliteInteface():
 		dbPath = os.path.join(os.path.dirname(__file__),relDBPath)
 		conn = sqlite3.connect(dbPath)
 		self.c = conn.cursor()
+
+		self.c.execute('''CREATE INDEX IF NOT EXISTS problemIndex ON runs (problem_id)''')
+		conn.commit()
 		
 	def __del__(self):
 		self.c.close()
