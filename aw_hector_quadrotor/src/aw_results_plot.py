@@ -130,8 +130,7 @@ def plotTimeAndDistancePLimit(map_name,order = "ASC", limit=20,figNameT = None,f
 				WHERE ps.map_name = "%s"
 				AND runH.plan_success = 1 AND runT.plan_success = 1 AND runG.plan_success = 1
 				AND runH.num_drones = runT.num_drones AND runH.num_drones = runG.num_drones
-				ORDER BY runG.plan_execution_time %s
-				LIMIT %s'''%(map_name,order,limit))
+				ORDER BY runG.plan_execution_time %s '''%(map_name,order))
 	
 	result = sq.c.fetchall()
 	print result
@@ -338,28 +337,28 @@ def plotTimeScatter(map_name,figNameT = None,figNameD = None):
 if __name__ == '__main__':
 	sq = SqliteInteface('../../results-current.sqlite')
 
-	#plotSuccessP("maze3","maze3_success.pdf")
-	#plotSuccessP("maze4","maze4_success.pdf")
-	#plotSuccessP("liuB2","liuB2_success.pdf")
+	plotSuccessP("maze3","maze3_success.pdf")
+	plotSuccessP("maze4","maze4_success.pdf")
+	plotSuccessP("liuB2","liuB2_success.pdf")
 	
-	#plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
-	#plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
-	#plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
-	#plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_h.pdf",figNameD="liuB2_distanceL_h.pdf",order="DESC")
-	#plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_l.pdf",figNameD="liuB2_distanceL_l.pdf",order="ASC")
+	plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
+	plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
+	plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
+	plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_h.pdf",figNameD="liuB2_distanceL_h.pdf",order="DESC")
+	plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_l.pdf",figNameD="liuB2_distanceL_l.pdf",order="ASC")
 	
-	plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_h.pdf",figNameD="maze3_distanceL_h.pdf",order="DESC")
-	plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_l.pdf",figNameD="maze3_distanceL_l.pdf",order="ASC")
+	#plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_h.pdf",figNameD="maze3_distanceL_h.pdf",order="DESC")
+	#plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_l.pdf",figNameD="maze3_distanceL_l.pdf",order="ASC")
 
 	
-	#plotTimeAndDistanceD("maze3","maze3_timeD.pdf","maze3_distanceD.pdf")
-	#plotTimeAndDistanceD("maze4","maze4_timeD.pdf","maze4_distanceD.pdf")
-	#plotTimeAndDistanceD("liuB2","liuB2_timeD.pdf","liuB2_distanceD.pdf")
-	#plotHist("liuB2")
-	#plotTimeAndDistanceLine("liuB2")
-	#plotTimeScatter("liuB2")
-	#plotTimeScatter("maze3")
-	#plotTimeAndDistanceLine("maze3")
+	plotTimeAndDistanceD("maze3","maze3_timeD.pdf","maze3_distanceD.pdf")
+	plotTimeAndDistanceD("maze4","maze4_timeD.pdf","maze4_distanceD.pdf")
+	plotTimeAndDistanceD("liuB2","liuB2_timeD.pdf","liuB2_distanceD.pdf")
+	plotHist("liuB2")
+	plotTimeAndDistanceLine("liuB2")
+	plotTimeScatter("liuB2")
+	plotTimeScatter("maze3")
+	plotTimeAndDistanceLine("maze3")
 	pylab.show()
 	
 	

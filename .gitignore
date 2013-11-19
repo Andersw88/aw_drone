@@ -8,6 +8,8 @@
 *.so
 *.pyc
 
+*.pdf
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -24,11 +26,14 @@
 ######################
 *.log
 *.sql
-*.sqlite
+*.sqlite*
 
 *.kdev4
-*~
-*#
+
+*.sln
+*.suo
+*.s
+*.pyproj
 
 
 # OS generated files #
@@ -40,3 +45,6 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+*~
+*#
