@@ -337,28 +337,31 @@ def plotTimeScatter(map_name,figNameT = None,figNameD = None):
 if __name__ == '__main__':
 	sq = SqliteInteface('../../results-current.sqlite')
 
-	plotSuccessP("maze3","maze3_success.pdf")
-	plotSuccessP("maze4","maze4_success.pdf")
-	plotSuccessP("liuB2","liuB2_success.pdf")
+	#plotSuccessP("maze3","maze3_success.pdf")
+	#plotSuccessP("maze4","maze4_success.pdf")
+	#plotSuccessP("liuB2","liuB2_success.pdf")
+	plotSuccessP("maze5","liuB2_success.pdf")
+	plotTimeAndDistanceP("maze5","maze5_time.pdf","maze5_distance.pdf")
+	plotTimeAndDistanceD("maze5","maze5_timeD.pdf","maze5_distanceD.pdf")
 	
-	plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
-	plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
-	plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
-	plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_h.pdf",figNameD="liuB2_distanceL_h.pdf",order="DESC")
-	plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_l.pdf",figNameD="liuB2_distanceL_l.pdf",order="ASC")
+	#plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
+	#plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
+	#plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
+	#plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_h.pdf",figNameD="liuB2_distanceL_h.pdf",order="DESC")
+	#plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_l.pdf",figNameD="liuB2_distanceL_l.pdf",order="ASC")
 	
 	#plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_h.pdf",figNameD="maze3_distanceL_h.pdf",order="DESC")
 	#plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_l.pdf",figNameD="maze3_distanceL_l.pdf",order="ASC")
 
 	
-	plotTimeAndDistanceD("maze3","maze3_timeD.pdf","maze3_distanceD.pdf")
-	plotTimeAndDistanceD("maze4","maze4_timeD.pdf","maze4_distanceD.pdf")
-	plotTimeAndDistanceD("liuB2","liuB2_timeD.pdf","liuB2_distanceD.pdf")
-	plotHist("liuB2")
-	plotTimeAndDistanceLine("liuB2")
-	plotTimeScatter("liuB2")
-	plotTimeScatter("maze3")
-	plotTimeAndDistanceLine("maze3")
+	#plotTimeAndDistanceD("maze3","maze3_timeD.pdf","maze3_distanceD.pdf")
+	#plotTimeAndDistanceD("maze4","maze4_timeD.pdf","maze4_distanceD.pdf")
+	#plotTimeAndDistanceD("liuB2","liuB2_timeD.pdf","liuB2_distanceD.pdf")
+	#plotHist("liuB2")
+	#plotTimeAndDistanceLine("liuB2")
+	#plotTimeScatter("liuB2")
+	#plotTimeScatter("maze3")
+	#plotTimeAndDistanceLine("maze3")
 	pylab.show()
 	
 	

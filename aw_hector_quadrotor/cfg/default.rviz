@@ -7,18 +7,23 @@ Panels:
         - /Global Options1
         - /Status1
         - /Odometry1
+        - /drone21
         - /drone21/Path1
-        - /drone11/Path1
+        - /drone31
         - /drone31/Path1
+        - /drone41
         - /drone41/Path1
+        - /drone51
         - /drone51/Path1
+        - /drone61
         - /drone61/Path1
         - /drone71/Path1
         - /drone71/RobotModel1
         - /drone81
+        - /drone81/Path1
         - /drone91/RobotModel1
       Splitter Ratio: 0.56917
-    Tree Height: 747
+    Tree Height: 359
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -34,10 +39,28 @@ Panels:
     Name: Views
     Splitter Ratio: 0.5
   - Class: rviz/Time
-    Experimental: false
+    Experimental: true
     Name: Time
     SyncMode: 0
     SyncSource: ""
+  - Class: rviz/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Grid1
+        - /drone21/Path1
+        - /drone31
+        - /drone31/Path1
+        - /drone71
+        - /drone71/Path1
+      Splitter Ratio: 0.5
+    Tree Height: 775
 Visualization Manager:
   Class: ""
   Displays:
@@ -45,20 +68,20 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 160; 160; 164
-      Enabled: false
+      Enabled: true
       Line Style:
         Line Width: 0.03
         Value: Lines
       Name: Grid
       Normal Cell Count: 0
       Offset:
-        X: 0
-        Y: 0
+        X: 7.5
+        Y: 7.5
         Z: 0
       Plane: XY
-      Plane Cell Count: 10
+      Plane Cell Count: 15
       Reference Frame: <Fixed Frame>
-      Value: false
+      Value: true
     - Class: rviz/TF
       Enabled: false
       Frame Timeout: 15
@@ -125,56 +148,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
-          Enabled: true
-          Name: Path
-          Topic: /drone2/nav_msgs/Path
-          Value: true
-        - Alpha: 1
-          Class: rviz/RobotModel
-          Collision Enabled: false
-          Enabled: true
-          Links:
-            All Links Enabled: true
-            Expand Joint Details: false
-            Expand Link Details: false
-            Expand Tree: false
-            Link Tree Style: Links in Alphabetic Order
-            base_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            sonar_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-          Name: RobotModel
-          Robot Description: drone2/robot_description
-          TF Prefix: drone2
-          Update Interval: 0
-          Value: true
-          Visual Enabled: true
-        - Class: rviz/Image
-          Enabled: false
-          Image Topic: /drone2/ardrone/image_raw
-          Max Value: 1
-          Median window: 5
-          Min Value: 0
-          Name: Image
-          Normalize Range: true
-          Queue Size: 2
-          Transport Hint: raw
-          Value: false
-      Enabled: true
-      Name: drone2
-    - Class: rviz/Group
-      Displays:
-        - Alpha: 1
-          Buffer Length: 1
-          Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 0; 0; 255
           Enabled: true
           Name: Path
           Topic: /drone1/nav_msgs/Path
@@ -221,6 +195,55 @@ Visualization Manager:
     - Class: rviz/Group
       Displays:
         - Alpha: 1
+          Buffer Length: 1
+          Class: rviz/Path
+          Color: 255; 0; 0
+          Enabled: true
+          Name: Path
+          Topic: /drone2/nav_msgs/Path
+          Value: true
+        - Alpha: 1
+          Class: rviz/RobotModel
+          Collision Enabled: false
+          Enabled: true
+          Links:
+            All Links Enabled: true
+            Expand Joint Details: false
+            Expand Link Details: false
+            Expand Tree: false
+            Link Tree Style: Links in Alphabetic Order
+            base_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            sonar_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+          Name: RobotModel
+          Robot Description: drone2/robot_description
+          TF Prefix: drone2
+          Update Interval: 0
+          Value: true
+          Visual Enabled: true
+        - Class: rviz/Image
+          Enabled: false
+          Image Topic: /drone2/ardrone/image_raw
+          Max Value: 1
+          Median window: 5
+          Min Value: 0
+          Name: Image
+          Normalize Range: true
+          Queue Size: 2
+          Transport Hint: raw
+          Value: false
+      Enabled: true
+      Name: drone2
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 1
           Class: rviz/RobotModel
           Collision Enabled: false
           Enabled: true
@@ -261,7 +284,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 255; 255; 0
           Enabled: true
           Name: Path
           Topic: /drone4/nav_msgs/Path
@@ -294,17 +317,6 @@ Visualization Manager:
           Visual Enabled: true
       Enabled: true
       Name: drone4
-    - Class: rviz/Image
-      Enabled: false
-      Image Topic: /ardrone/image_raw
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
-      Value: false
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -336,7 +348,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 255; 0; 234
           Enabled: true
           Name: Path
           Topic: /drone5/nav_msgs/Path
@@ -374,7 +386,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 0; 0; 0
           Enabled: true
           Name: Path
           Topic: /drone6/nav_msgs/Path
@@ -386,7 +398,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 255; 163; 3
           Enabled: true
           Name: Path
           Topic: /drone7/nav_msgs/Path
@@ -424,7 +436,7 @@ Visualization Manager:
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
-          Color: 25; 255; 0
+          Color: 0; 251; 255
           Enabled: true
           Name: Path
           Topic: /drone8/nav_msgs/Path
@@ -477,16 +489,6 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
-            base_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            sonar_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
           Name: RobotModel
           Robot Description: drone9/robot_description
           TF Prefix: drone9
@@ -515,16 +517,6 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
-            base_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            sonar_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
           Name: RobotModel
           Robot Description: drone10/robot_description
           TF Prefix: drone10
@@ -533,6 +525,17 @@ Visualization Manager:
           Visual Enabled: true
       Enabled: true
       Name: drone10
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /ardrone/image_raw
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -557,27 +560,27 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 28.5892
+      Distance: 34.3353
       Focal Point:
         X: 7.84838
         Y: 7.64847
         Z: -6.80541
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 1.5448
+      Pitch: 1.5698
       Target Frame: odom
       Value: Orbit (rviz)
-      Yaw: 4.71869
+      Yaw: 4.71239
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1028
+  Height: 1056
   Hide Left Dock: false
   Hide Right Dock: false
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000010f0000037afc020000000afb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c00610079007301000000280000037a000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d0061006700650000000190000000a80000001600fffffffb0000000a0049006d006100670065000000028f0000012f0000001600fffffffb0000000a0049006d00610067006500000002c4000000fa0000001600ffffff000000010000014b0000037afc0200000004fb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000000280000037a0000006400fffffffb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000028000001810000000000000000fb0000000a0056006900650077007300000000280000037a000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004e00000003efc0100000002fb0000000800540069006d00650100000000000004e0000002f600fffffffb0000000800540069006d00650100000000000004500000000000000000000003cb0000037a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000003000000000000010f00000396fc020000000bfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000006400fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000002800000396000000dd00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000000a0049006d0061006700650000000190000000a80000001600fffffffb0000000a0049006d006100670065000000028f0000012f0000001600fffffffb0000000a0049006d00610067006500000002c4000000fa0000001600fffffffb000000100044006900730070006c006100790073010000002800000396000000dd00ffffff000000010000014b00000396fc0200000005fb0000000a00560069006500770073010000002800000396000000b000fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000000280000037a0000006400fffffffb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000028000001810000000000000000fb0000000a0056006900650077007300000000280000037a000000b000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b20000000000000000000000030000073f0000003efc0100000002fb0000000800540069006d006501000000000000073f0000031b00fffffffb0000000800540069006d00650100000000000004500000000000000000000004d90000039600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -586,6 +589,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1248
-  X: 610
+  Width: 1855
+  X: 58
   Y: 24
