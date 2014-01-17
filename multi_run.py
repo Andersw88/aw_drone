@@ -85,11 +85,9 @@ class Runner():
 		for i in range(0,self.iterations):
 			run_id = self.logProblem(i)
 			for droneCount in self.numDrones:
-				startsRandomOrder = self.starts[i][0:droneCount]
-				shuffle(startsRandomOrder)
 				for tdm in self.tdms:
 					for mpm in self.mpms:
-						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%startsRandomOrder,'goals:=%s'%(self.goals[i][0:droneCount],)]
+						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%self.starts[i][0:droneCount],'goals:=%s'%(self.goals[i][0:droneCount],)]
 						print ' '.join(args)
 						subprocess.check_output(args)
 						self.totalIterations += 1
@@ -134,7 +132,13 @@ if __name__ == '__main__':
 	
 	#runner = Runner([4,6,8,10],2,[0,2,3],['PP'],'maze5',start= [[0.5, 0.5], [2.5, 0.5], [4.5, 0.5], [0.5, 2.5], [2.5, 2.5], [4.5, 2.5],[3.5, 3.5], [4.5, 4.5], [2.5, 4.5], [0.5, 4.5]])
 	#runner.runAll()
-	runner = Runner([6],1,[0,2,3,4],['PP'],'maze3')
+	
+	#First is the number of drones (can be 4,6,8 or 10)
+	#Second is number of runs with the same setup, but different initial conditions.
+	#Third are the task deligation modes. 0=Hungarian, 2=Hungarian with threshold, 3=old greedyfirst(bad), 4 new greedyfirstv2.
+	#Forth is the global planner planning mode
+	#Fifth is the map name.
+	runner = Runner([6],1,[0,2,4],['PP'],'maze3')
 	runner.runAll()
 
 
