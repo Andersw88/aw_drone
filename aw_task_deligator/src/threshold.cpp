@@ -70,7 +70,7 @@ double ThresholdAlgorithm::getMedianWithThreshold(double lowThreshold = 0,double
 			{
 				values.insert(matrix(row,col));
 			}
-			//if(values.size() == 0) return lowThreshold;
+			if(values.size() == 0) return lowThreshold;
 			std::multiset<double>::iterator it = values.begin();
 			std::advance(it,(values.size()-1)/2);
 			if(values.size() % 2 == 0)
@@ -81,38 +81,66 @@ double ThresholdAlgorithm::getMedianWithThreshold(double lowThreshold = 0,double
 			}
 			else return *it;
 }
-void ThresholdAlgorithm::printMatrix()
+void ThresholdAlgorithm::printMatrix(Matrix<double> &tempMatrix)
 {
-	int nrows = matrix.rows();
-	int ncols = matrix.columns();
+	int nrows = tempMatrix.rows();
+	int ncols = tempMatrix.columns();
 	for ( int row = 0 ; row < nrows ; row++ ) {
 		for ( int col = 0 ; col < ncols ; col++ ) {
-			std::cout.width(2);
-			std::cout << matrix(row,col) << ",";
+			std::cout.width(3);
+			std::cout << tempMatrix(row,col) << ",";
 		}
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
 }
 
-bool ThresholdAlgorithm::findBipartianSolution(std::vector<int>& rowCol,int row)
+bool ThresholdAlgorithm::findBipartianSolution(Matrix<double>& tempMatrix,std::vector<int>& rowCol)
 {
-	for ( int col = 0 ; col < matrix.columns() ; col++ ) {
+	//Yes, this is slow for large n, but there exists ways solve this quickly.
+	std::vector<std::pair<int,int> > rowOrder;
+	col_mask = std::vector<bool>(tempMatrix.columns(),false);
+	for ( int row = 0 ; row < tempMatrix.rows() ; row++ ) {
+		int zeroCols = 0;
+		for ( int col = 0 ; col < tempMatrix.columns() ; col++ ) {
+			if(tempMatrix(row,col) == 0)
+			{
+				zeroCols++;
+			}
+		}
+		if(zeroCols==0)
+		{
+			return false;
+		}
+		else
+		{
+			rowOrder.push_back(std::make_pair(zeroCols,row));
+		}
+	}
+	std::sort(rowOrder.begin(),rowOrder.end());
+
+	return findPairing(tempMatrix,rowOrder,rowCol);
+}
+
+bool ThresholdAlgorithm::findPairing(Matrix<double>& tempMatrix,std::vector<std::pair<int,int> >& rowOrder,std::vector<int>& rowCol,int row)
+{
+	int matrixRow = rowOrder[row].second;
+	for ( int col = 0 ; col < tempMatrix.columns() ; col++ ) {
 		
-		if(matrix(row,col) == 0 && !col_mask[col])
+		if(tempMatrix(matrixRow,col) == 0 && !col_mask[col])
 		{	
-			rowCol[row] = col;
-			if(row == matrix.rows()-1){
+			rowCol[matrixRow] = col;
+			if(row == tempMatrix.rows()-1){
 				return true;
 			}
 			else{
 				col_mask[col] = true;
-				if(findBipartianSolution(rowCol,row+1)){
+				if(findPairing(tempMatrix,rowOrder,rowCol,row+1)){
 					return true;
 				}
 				else
 				{
-					rowCol[row] = -1;
+					rowCol[matrixRow] = -1;
 					col_mask[col] = false;
 				}
 			}
@@ -120,34 +148,34 @@ bool ThresholdAlgorithm::findBipartianSolution(std::vector<int>& rowCol,int row)
 	}
 	return false;
 }
-bool ThresholdAlgorithm::findBipartianSolution(int row)
+//bool ThresholdAlgorithm::findBipartianSolution(int row)
+//{
+//	for ( int col = 0 ; col < matrix.columns() ; col++ ) {
+//		if(matrix(row,col) == 0 && !col_mask[col])
+//		{	
+//			if(row == matrix.rows()-1){
+//				return true;
+//			}
+//			else{
+//				col_mask[col] = true;
+//				if(findBipartianSolution(row+1)){
+//					return true;
+//				}
+//				else
+//				{
+//					col_mask[col] = false;
+//				}
+//			}
+//		}
+//	}
+//	return false;
+//}
+void ThresholdAlgorithm::setMatixZerosBelowThreshold(Matrix<double>& tempMatrix, double threshold)
 {
-	for ( int col = 0 ; col < matrix.columns() ; col++ ) {
-		if(matrix(row,col) == 0 && !col_mask[col])
-		{	
-			if(row == matrix.rows()-1){
-				return true;
-			}
-			else{
-				col_mask[col] = true;
-				if(findBipartianSolution(row+1)){
-					return true;
-				}
-				else
-				{
-					col_mask[col] = false;
-				}
-			}
-		}
-	}
-	return false;
-}
-void ThresholdAlgorithm::setMatixZerosBelowThreshold(double threshold)
-{
-	for ( int row = 0 ; row < matrix.rows() ; row++ ){
-		for ( int col = 0 ; col < matrix.columns() ; col++ ){
-			if(matrix(row,col) <= threshold)
-				matrix(row,col) = 0;
+	for ( int row = 0 ; row < tempMatrix.rows() ; row++ ){
+		for ( int col = 0 ; col < tempMatrix.columns() ; col++ ){
+			if(tempMatrix(row,col) <= threshold)
+				tempMatrix(row,col) = 0;
 		}
 	}
 }
@@ -156,7 +184,7 @@ void ThresholdAlgorithm::setMatixINFINITYAboveThreshold(double threshold, Matrix
 	for ( int row = 0 ; row < m.rows() ; row++ ){
 		for ( int col = 0 ; col < m.columns() ; col++ ){
 			if(m(row,col) > threshold)
-				m(row,col) = 99999;
+				m(row,col) = INFINITY;
 		}
 	}
 }
@@ -165,74 +193,52 @@ std::vector<int> ThresholdAlgorithm::solve(Matrix<double> &m) {
 	this->matrix = m;
 	assert(this->matrix.rows() == this->matrix.columns());
 	col_mask = std::vector<bool>(matrix.columns(),false);
-	//row_mask = std::vector<bool>(matrix.rows(),false);
 
 	this->costH = getHighest();
-	std::cout << "High val:" << this->costH << std::endl;
 	this->costL = getLowest();
-	std::cout << "Low val:" << this->costL << std::endl;
-	//double median = getMedianWithThreshold(costL,costH);
-	//std::cout << "Median:" << median << std::endl;
-	//double median2 = getMedianWithThreshold(7,costH);
-	//std::cout << "Median:" << median2 << std::endl;
-	//double median3 = getMedianWithThreshold(costL,1);
-	//std::cout << "Median:" << median3 << std::endl;
-	//printMatrix();
 
 	std::vector<int> rowCol(matrix.rows(),-1);
-	//if(findBipartianSolution(rowCol))
-	//	std::cout << "success" << std::endl;
-	//else std::cout << "failed" << std::endl;
 
-	//for ( int row = 0 ; row < matrix.rows() ; row++ ) {
-	//	std::cout.width(2);
-	//	std::cout << rowCol[row] << ",";
-	//}
-	//std::cout << std::endl;
-
-	//Matrix tempMatrix = m;
-
-	double cost = costH;
-	bool lowBound = true;
+	double prevMedian = -1;
 	double median;
-	double prevThreshold = -1; 
-	while(costL < cost || cost < costH) //This implementation is kind of messed up but it works good enough.
+
+	while(costL < costH)
 	{
-
-		setMatixZerosBelowThreshold(costL);
-		if(lowBound) {
-			median = getMedianWithThreshold(costL,cost);
-		} else { 
-			median = getMedianWithThreshold(cost,costH);
-		}
-
-		cost = median;
-		setMatixZerosBelowThreshold(cost);
-		//printMatrix();
-
+		median = getMedianWithThreshold(costL,costH);
+		Matrix<double> tempMatrix = this->matrix;
 		
-		if(prevThreshold == cost) {
-			break;
+		if(median == prevMedian)
+		{
+			setMatixZerosBelowThreshold(tempMatrix,costH-1);
+			if(findBipartianSolution(tempMatrix,rowCol))
+			{
+				//printf("Here???\n");
+				costH = costH-1;
+				continue;
+			}
+			else
+				break;
 		}
-		rowCol = std::vector<int>(matrix.rows(),-1);
-		col_mask = std::vector<bool>(matrix.columns(),false);
-		if(findBipartianSolution(rowCol))
+		//printf("costL:%f, costH %f,median %f\n",costL,costH,median);
+		setMatixZerosBelowThreshold(tempMatrix,median);
+		//printMatrix(tempMatrix);
+		if(findBipartianSolution(tempMatrix,rowCol))
 		{
 			costH = median;
-			matrix = m;
-			lowBound = true;
 		}
-		else
+		else 
 		{
 			costL = median;
-			lowBound = false;
 		}
-		prevThreshold = cost;
+		
+		prevMedian = median;
 	}
-	//setMatixZerosBelowThreshold(cost);
-	//std::cout << "Final" << std::endl;
-	//printMatrix();
-	setMatixINFINITYAboveThreshold(cost,m);
+	
+	setMatixZerosBelowThreshold(matrix,costH);
+	//printMatrix(matrix);
+
+	findBipartianSolution(matrix,rowCol);
+	setMatixINFINITYAboveThreshold(costH,m);
 	//std::cout << counter++ <<",L:" << costL <<",H:" << costH << std::endl;
 	return rowCol;
 }

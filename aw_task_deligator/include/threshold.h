@@ -35,10 +35,11 @@ private:
 	double getHighest();
 	double getLowest();
 	double getMedianWithThreshold(double lowThreshold,double highThreshold);
-	void printMatrix();
-	bool findBipartianSolution(std::vector<int>& rowCol,int row = 0);
-	bool findBipartianSolution(int row = 0);
-	void setMatixZerosBelowThreshold(double threshold);
+	void printMatrix(Matrix<double> &tempMatrix);
+	bool findBipartianSolution(Matrix<double>& tempMatrix,std::vector<int>& rowCol);
+	bool findPairing(Matrix<double>& tempMatrix,std::vector<std::pair<int,int> >& rowOrder, std::vector<int>& rowCol,int row = 0);
+	//bool findBipartianSolution(int row = 0);
+	void setMatixZerosBelowThreshold(Matrix<double>& tempMatrix, double threshold);
 	void setMatixINFINITYAboveThreshold(double threshold,Matrix<double>& m);
 
 

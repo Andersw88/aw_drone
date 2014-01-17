@@ -37,6 +37,7 @@ class Runner():
 			self.starts =  [start for i in range(iterations)]
 			self.goals = self.genGoals(self.maxDrones)
 
+		#pprint (self.starts)
 		#print self.goals
 		#print self.starts
 
@@ -77,18 +78,18 @@ class Runner():
 				if(self.mapData[y][x] != 0 and not(goalT in startsSet)):
 					goals.add(goalT)
 			goalsList.append([[goal[0],goal[1]] for goal in goals])
-		return goalsList	
+		return goalsList
 
 	def runAll(self):
 		#pprint (self.numDrones)
 		for i in range(0,self.iterations):
 			run_id = self.logProblem(i)
 			for droneCount in self.numDrones:
-				startsRandomOrder = shuffle(self.starts[i][0:droneCount])
+				startsRandomOrder = self.starts[i][0:droneCount]
+				shuffle(startsRandomOrder)
 				for tdm in self.tdms:
 					for mpm in self.mpms:
-
-						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=0','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%startsRandomOrder,'goals:=%s'%(self.goals[i][0:droneCount],)]
+						args = ['roslaunch', 'aw_hector_quadrotor', 'sim%s.launch'%(droneCount,),'map_name:=%s'%self.mapName,'rviz:=1','run_id:=%s'%(run_id,), 'tdm:=%s'%(tdm,),'mpm:=%s'%(mpm,),'starts:=%s'%startsRandomOrder,'goals:=%s'%(self.goals[i][0:droneCount],)]
 						print ' '.join(args)
 						subprocess.check_output(args)
 						self.totalIterations += 1
@@ -131,10 +132,10 @@ def createSQLiteDB():
 if __name__ == '__main__':
 	createSQLiteDB()
 	
-	runner = Runner([4,6,8,10],100,[0,2,3],['PP'],'maze5',start= [[0.5, 0.5], [2.5, 0.5], [4.5, 0.5], [0.5, 2.5], [2.5, 2.5], [4.5, 2.5],[3.5, 3.5], [4.5, 4.5], [2.5, 4.5], [0.5, 4.5]])
-	runner.runAll()
-	#runner = Runner([6],1,[0,2,3],['PP'],'maze3')
+	#runner = Runner([4,6,8,10],2,[0,2,3],['PP'],'maze5',start= [[0.5, 0.5], [2.5, 0.5], [4.5, 0.5], [0.5, 2.5], [2.5, 2.5], [4.5, 2.5],[3.5, 3.5], [4.5, 4.5], [2.5, 4.5], [0.5, 4.5]])
 	#runner.runAll()
+	runner = Runner([6],1,[0,2,3,4],['PP'],'maze3')
+	runner.runAll()
 
 
 	
