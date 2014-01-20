@@ -18,9 +18,16 @@ from aw_task_deligator.srv import *
     
 class SolverWrapper():
 
-	def __init__(self,jsonObjectives):
+	#def __init__(self,jsonObjectives):
+		#dirPath = os.path.join(os.path.dirname(__file__))
+		#self.args = ['java', '-jar', '%s/uber-solver.jar' %(dirPath), '-json',jsonObjectives]
+		##self.args = ['java', '-jar', 'uber-solver.jar', '-json',jsonObjectives]
+		##self.jsonObjectives = jsonObjectives
+		
+	def __init__(self,args):
 		dirPath = os.path.join(os.path.dirname(__file__))
-		self.args = ['java', '-jar', '%s/uber-solver.jar' %(dirPath), '-json',jsonObjectives]
+		self.args = ['java', '-jar', '%s/solver.jar' %(dirPath)]
+		self.args.extend(args)
 		#self.args = ['java', '-jar', 'uber-solver.jar', '-json',jsonObjectives]
 		#self.jsonObjectives = jsonObjectives
 		
@@ -60,17 +67,28 @@ def multiPlannerService(req):
 	
 	if(not(map_name)):
 		rospy.logerr('aw_multi_solver_wrapper: param "aw/map_name" not set')
-		
-	jsonObjectives = json.dumps({'method': method,
-								'problemfile': '%s/problems/%s.xml' %(os.path.join(os.path.dirname(__file__)),map_name,),
-								'timeout': timeout,
-								'showvis': multiplanner_vis,
-								'maxtime': maxtime,
-								'gridStep': grid_step,
-								'mission':[ {'startX':int(round(objectives.starts[i].x*multiplanner_map_scale/(5))*(5)),'startY':int(round(objectives.starts[i].y*multiplanner_map_scale/(5))*(5)),
-											  'targetX':int(objectives.targets[i].x*multiplanner_map_scale),'targetY':int(objectives.targets[i].y*multiplanner_map_scale),
-											  'rad':drone_rad*multiplanner_map_scale,
-											  'maxSpeed':1} for i in range(len(objectives.starts))]
+	
+	#jsonObjectives = json.dumps({'method': method,
+								#'problemfile': '%s/problems/%s.xml' %(os.path.join(os.path.dirname(__file__)),map_name,),
+								#'timeout': timeout,
+								#'showvis': multiplanner_vis,
+								#'maxtime': maxtime,
+								#'gridStep': grid_step,
+								#'mission':[ {'startX':int(round(objectives.starts[i].x*multiplanner_map_scale/(5))*(5)),'startY':int(round(objectives.starts[i].y*multiplanner_map_scale/(5))*(5)),
+											  #'targetX':int(objectives.targets[i].x*multiplanner_map_scale),'targetY':int(objectives.targets[i].y*multiplanner_map_scale),
+											  #'rad':drone_rad*multiplanner_map_scale,
+											  #'maxSpeed':1} for i in range(len(objectives.starts))]
+											  
+	args = ['-method',method,
+			'-problemfile','%s/problems/%s.xml' %(os.path.join(os.path.dirname(__file__)),map_name,),
+			'-timeout','%s' %timeout,
+			#'-showvis','%s' %multiplanner_vis,
+			'-maxtime', '%s' %maxtime,
+			'-gridstep', '%s' %grid_step,
+			'-mission', '%s' %(formatMissionString(objectives,drone_rad,multiplanner_map_scale))
+			]
+	if(multiplanner_vis):
+		args.extend('-showvis')
 								
 								
 								#'mission':[{'startsX':[int(start.x) for start in objectives.starts],
@@ -79,13 +97,23 @@ def multiPlannerService(req):
 											##'targetsY':[int(target.y) for target in objectives.targets],
 											##'rad':[15 for start in objectives.starts],
 											##'maxSpeed':[1 for start in objectives.starts]]}
-								})
-	print jsonObjectives
-	solverWrapper = SolverWrapper(jsonObjectives)
+								#})
+	print args
+	solverWrapper = SolverWrapper(args)
 	plan = solverWrapper.callSolver()
 	return MultiPlannerResponse(plan)
 		
-	
+def formatMissionString(objectives,radius,multiplanner_map_scale):
+	missionString = ''
+	for i in range(len(objectives.starts)):
+		missionString = missionString + '%s,%s:%s,%s:%s:%s;' %(int(round(objectives.starts[i].x*multiplanner_map_scale/(5))*(5)), 
+															int(round(objectives.starts[i].y*multiplanner_map_scale/(5))*(5)),
+															int(objectives.targets[i].x*multiplanner_map_scale),
+															int(objectives.targets[i].y*multiplanner_map_scale),
+															int(radius*multiplanner_map_scale),
+															1)
+	missionString = missionString[:-1]
+	return missionString
 	
 if __name__ == '__main__':
 	#rospy.init_node('aw_multi_solver_wrapper', anonymous=True)	

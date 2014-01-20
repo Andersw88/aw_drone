@@ -135,10 +135,12 @@ if __name__ == '__main__':
 	
 	#First is the number of drones (can be 4,6,8 or 10)
 	#Second is number of runs with the same setup, but different initial conditions.
-	#Third are the task deligation modes. 0=Hungarian, 2=Hungarian with threshold, 3=old greedyfirst(bad), 4 new greedyfirstv2.
-	#Forth is the global planner planning mode
-	#Fifth is the map name.
-	runner = Runner([6],1,[0,2,4],['PP'],'maze3')
+	#Third are the task deligation modes. 0=Hungarian, 2=Hungarian with threshold, 3=old greedyfirst, 4 new greedyfirstv2.
+	#Forth is the global planner planning mode 'PP' or 'IIHP', more?
+	#Fifth is the map name. (maze3, maze4, or liuB2)
+	
+	runner = Runner([10],10,[0],['PP'],'liuB2')
+	#runner = Runner([10],10,[0],['PP',IIHP],'liuB2')
 	runner.runAll()
 
 
