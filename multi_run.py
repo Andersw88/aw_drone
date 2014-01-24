@@ -139,7 +139,7 @@ if __name__ == '__main__':
 	#Forth is the global planner planning mode 'PP' or 'IIHP', more?
 	#Fifth is the map name. (maze3, maze4, or liuB2)
 	
-	runner = Runner([10],10,[0],['PP'],'liuB2')
+	runner = Runner([10],10,[3],['KDPMD','PP'],'maze3')
 	#runner = Runner([10],10,[0],['PP',IIHP],'liuB2')
 	runner.runAll()
 

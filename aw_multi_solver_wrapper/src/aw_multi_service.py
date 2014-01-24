@@ -85,7 +85,8 @@ def multiPlannerService(req):
 			#'-showvis','%s' %multiplanner_vis,
 			'-maxtime', '%s' %maxtime,
 			'-gridstep', '%s' %grid_step,
-			'-mission', '%s' %(formatMissionString(objectives,drone_rad,multiplanner_map_scale))
+			'-mission', '%s' %(formatMissionString(objectives,drone_rad,multiplanner_map_scale)),
+			'-k', '5'
 			]
 	if(multiplanner_vis):
 		args.extend('-showvis')
