@@ -35,8 +35,8 @@ public:
     // geometry_msgs::Twist ttwist = pose->twist.twist;
     geometry_msgs::Twist temp_out_twist;
     // velocity_. = geometry_msgs::Twist(geometry_msgs::Vector3(1.0,1.0,1.0),geometry_msgs::Vector3());
-    velocity_.linear.x = std::min((goal_.x - tpoint.x),2.0);// * Math::cos(costrotation.z);
-    velocity_.linear.y = std::min((goal_.y - tpoint.y),2.0);
+    velocity_.linear.x = std::min((goal_.x - tpoint.x)*1.5,2.0);// * Math::cos(costrotation.z);
+    velocity_.linear.y = std::min((goal_.y - tpoint.y)*1.5,2.0);
     velocity_.linear.z = 0;//(goal_.z - tpoint.z);
 	velocity_.angular.z = -tf::getYaw(pose->pose.pose.orientation);
     

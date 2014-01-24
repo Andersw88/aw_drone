@@ -1,0 +1,22 @@
+<package>
+  <description>
+
+     aw_hector_quadrotor
+
+  </description>
+  <name>aw_hector_quadrotor</name>
+  <version>1.1.0</version>
+  <author>Anders</author>
+  <license>BSD</license>
+  <url>http://ros.org/wiki/aw_hector_quadrotor</url>
+  <maintainer email="-@-.com">Anders</maintainer>
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>hector_quadrotor</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+</package>
+
+

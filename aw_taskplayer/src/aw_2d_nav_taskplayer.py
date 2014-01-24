@@ -247,7 +247,7 @@ if __name__ == '__main__':
 	#taskPlayer.delayedInit()
 
 	while not rospy.is_shutdown():
-		rospy.sleep(0.05)
+		rospy.sleep(0.01)
 		taskPlayer.update()
 		#taskPlayer.publishDronePaths()
 		

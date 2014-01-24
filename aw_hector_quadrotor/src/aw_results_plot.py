@@ -364,9 +364,12 @@ def plotTimeScatter(map_name,figNameT = None,figNameD = None):
 if __name__ == '__main__':
 	sq = SqliteInteface('../../results-current.sqlite')
 
-	plotSuccessP("maze3","maze3_success.pdf")
-	plotSuccessP("maze4","maze4_success.pdf")
-	plotSuccessP("liuB2","liuB2_success.pdf")
+	#plotSuccessP("maze3","maze3_success.pdf")
+	#plotSuccessP("maze4","maze4_success.pdf")
+	#plotSuccessP("liuB2","liuB2_success.pdf")
+	plotSuccessP("maze5","liuB2_success.pdf")
+	plotTimeAndDistanceP("maze5","maze5_time.pdf","maze5_distance.pdf")
+	plotTimeAndDistanceD("maze5","maze5_timeD.pdf","maze5_distanceD.pdf")
 	
 	#plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
 	#plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
