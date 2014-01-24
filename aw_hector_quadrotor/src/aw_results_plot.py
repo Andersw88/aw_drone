@@ -46,32 +46,48 @@ class SqliteInteface():
 			#if(resultFilter(result)):
 				#yield result
 				
-def autolabelP(rects):
-	for rect in rects:
-		height = rect.get_height()
-		pylab.text(rect.get_x()+rect.get_width()/2., 1.05*height, '{:.0%}'.format(height),ha='center', va='bottom')
-		#pylab.text(rect.get_x()+rect.get_width()/2., 1.05*height, '%d'%int(height),ha='center', va='bottom')
+def percentFormater(x, pos=0):
+	return '%1.0f%%'%(100*x)
 
-def autolabelD(rects):
+def autolabel(rects,formatString = "{:.0%}"):
 	for rect in rects:
 		height = rect.get_height()
-		pylab.text(rect.get_x()+rect.get_width()/2., 1.05*height, '%d'%int(height),ha='center', va='bottom')
+		pylab.text(rect.get_x()+rect.get_width()/2., 1.00*height, formatString.format(height),ha='center', va='bottom')
 		
-def makeBarPlot(title,labels,means,stds,autolabeler):
+def makeBarPlotD(title,nrs,means,stds,labels =['HA', 'HWT', 'GF']):
+	ind = numpy.arange(len(means[0]))
+	width = 0.25
+	colours = ['red','green','yellow']
+	pylab.figure()
+	pylab.title(title)
+	rects = []
+	for i in range(len(means)):
+		rects.extend([x for x in pylab.bar(width*ind+i-width,means[i],width,color=colours,align='center',yerr=stds[i],ecolor='k')])
+	pylab.ylabel('Time (sec)')
+
+	pylab.legend(rects[0:3],labels, loc = 2)
+	#pylab.ylim((0.4,1.2))
+	pylab.xticks(range(len(means)),nrs)
+	autolabel(rects,'{0:.0f}')
+
+def makeBarPlotP(title,nrs,means,stds,labels =['HA', 'HWT', 'GF']):
 	ind = numpy.arange(len(means[0]))
 	width = 0.25
 	colours = ['red','green','yellow']
 	pylab.figure()
 
 	pylab.title(title)
-	
+
 	rects = []
 	for i in range(len(means)):
 		#print means[i],stds[i]
 		rects.extend([x for x in pylab.bar(width*ind+i-width,means[i],width,color=colours,align='center',yerr=stds[i],ecolor='k')])
 	pylab.ylabel('Time (sec)')
-	pylab.xticks(range(len(means)),labels)
-	autolabeler(rects)
+
+	pylab.legend(rects[0:3],labels, loc = 2)
+	pylab.ylim((0.4,1.2))
+	pylab.xticks(range(len(means)),nrs)
+	autolabel(rects,"{:.0%}")
 	
 def mean_confidence_interval(data, confidence=0.95,pdist = stats.t):
 	a = 1.0*numpy.array(data)
@@ -103,7 +119,7 @@ def plotTimeAndDistanceP(map_name,figNameT = None,figNameD = None):
 			#mean_confidence_interval([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
 	#stds =  [[numpy.std([x[2]/x[6] for x in result if x[0] == n]),numpy.std([x[4]/x[6] for x in result if x[0] == n]),numpy.std([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
 	tsem = [[stats.tsem([x[2]/x[6] for x in result if x[0] == n]),stats.tsem([x[4]/x[6] for x in result if x[0] == n]),stats.tsem([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Distance",droneNrs,means,tsem,autolabelP)
+	makeBarPlotP("Distance",droneNrs,means,tsem)
 	if(figNameD):
 		pylab.savefig(figNameD,bbox_inches='tight')
 		
@@ -117,7 +133,7 @@ def plotTimeAndDistanceP(map_name,figNameT = None,figNameD = None):
 			
 	#stds =  [[numpy.std([x[1]/x[5] for x in result if x[0] == n]),numpy.std([x[3]/x[5] for x in result if x[0] == n]),numpy.std([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
 	tsem = [[stats.tsem([x[1]/x[5] for x in result if x[0] == n]),stats.tsem([x[3]/x[5] for x in result if x[0] == n]),stats.tsem([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Time",droneNrs,means,tsem,autolabelP)
+	makeBarPlotP("Time",droneNrs,means,tsem)
 	if(figNameT):
 		pylab.savefig(figNameT,bbox_inches='tight')
 		
@@ -145,7 +161,7 @@ def plotTimeAndDistancePLimit(map_name,order = "ASC", limit=20,figNameT = None,f
 			#mean_confidence_interval([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
 	#stds =  [[numpy.std([x[2]/x[6] for x in result if x[0] == n]),numpy.std([x[4]/x[6] for x in result if x[0] == n]),numpy.std([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
 	tsem = [[stats.tsem([x[2]/x[6] for x in result if x[0] == n]),stats.tsem([x[4]/x[6] for x in result if x[0] == n]),stats.tsem([x[6]/x[6] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Distance %s"%order,droneNrs,means,tsem,autolabelP)
+	makeBarPlotP("Distance %s"%order,droneNrs,means,tsem,autolabelP)
 	if(figNameD):
 		pylab.savefig(figNameD,bbox_inches='tight')
 		
@@ -159,7 +175,7 @@ def plotTimeAndDistancePLimit(map_name,order = "ASC", limit=20,figNameT = None,f
 			
 	#stds =  [[numpy.std([x[1]/x[5] for x in result if x[0] == n]),numpy.std([x[3]/x[5] for x in result if x[0] == n]),numpy.std([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
 	tsem = [[stats.tsem([x[1]/x[5] for x in result if x[0] == n]),stats.tsem([x[3]/x[5] for x in result if x[0] == n]),stats.tsem([x[5]/x[5] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Time %s"%order,droneNrs,means,tsem,autolabelP)
+	makeBarPlotP("Time %s"%order,droneNrs,means,tsem,autolabelP)
 	if(figNameT):
 		pylab.savefig(figNameT,bbox_inches='tight')
 		
@@ -186,7 +202,7 @@ def plotTimeAndDistanceD(map_name,figNameT = None,figNameD = None):
 	tsem = [[stats.tsem([x[2] for x in result if x[0] == n]),
 				stats.tsem([x[4] for x in result if x[0] == n]),
 				stats.tsem([x[6] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Distances %s"%map_name,droneNrs,means,tsem,autolabelD)
+	makeBarPlotD("Distances %s"%map_name,droneNrs,means,tsem)
 	if(figNameD):
 		pylab.savefig(figNameD,bbox_inches='tight')
 		
@@ -201,7 +217,7 @@ def plotTimeAndDistanceD(map_name,figNameT = None,figNameD = None):
 	tsem =  [[stats.tsem([x[1] for x in result if x[0] == n]),
 				stats.tsem([x[3] for x in result if x[0] == n]),
 				stats.tsem([x[5] for x in result if x[0] == n])] for n in droneNrs]
-	makeBarPlot("Time %s"%map_name,droneNrs,means,tsem,autolabelD)
+	makeBarPlotD("Time %s"%map_name,droneNrs,means,tsem)
 	if(figNameT):
 		pylab.savefig(figNameT,bbox_inches='tight')
 		
@@ -223,26 +239,37 @@ def plotHist(map_name,figNameT = None,figNameD = None):
 	pylab.figure()
 	pylab.title("%s:Hist of time"%map_name)
 	pylab.hist([x[2] for x in result if x[0] == 4],20)
-	
 	pylab.figure()
 	pylab.title("%s:Hist of time"%map_name)
+
+
 	pylab.hist([x[6] for x in result if x[0] == 4],20)
 
 	
 def plotSuccessP(map_name,figName = None):
 	sq.c.execute('''SELECT (SELECT COUNT(*) from runs WHERE map_name = "%s" GROUP BY num_drones,tdm),COUNT(*) FROM runs WHERE plan_success = 1 AND map_name = "%s" GROUP BY num_drones,tdm'''%(map_name,map_name))
 	result = sq.c.fetchall()
-	pylab.figure()
-	pylab.title('Algorithms')
+	fig = pylab.figure()
+	ax = fig.add_subplot(111)
+	pylab.title('Success rates')
+	pylab.ylim((0.0,1.3))
+
 	colours = ['red','green','yellow']
 	ind = []
 	for i in range(4):
 		ind.extend(range(0+i*4,3+i*4))
-	rects = pylab.bar(ind,[float(x[1])/float(x[0]) for x in result],1,align='center',color=colours)
+	rects = ax.bar(ind,[float(x[1])/float(x[0]) for x in result],1,align='center',color=colours)
 	for rect in rects:
 		height = rect.get_height()
-		pylab.text(rect.get_x()+rect.get_width()/2., height*0.95, '{:.0%}'.format(height),ha='center', va='bottom')
-	
+		ax.text(rect.get_x()+rect.get_width()/2., height, '{:.0%}'.format(height),ha='center', va='bottom')
+	labels =['HA', 'HWT', 'GF']
+	pylab.legend(rects[0:3],labels)
+	droneNrs = [4,6,8,10]
+	pylab.xticks(range(1,len(droneNrs)*4+1,4),droneNrs)
+
+	ax.yaxis.set_major_formatter(pylab.FuncFormatter(percentFormater))
+	ax.set_xlabel('Number of drones', size=15)
+	ax.set_ylabel('Success rate', size=15)
 	if(figName):
 		pylab.savefig(figName,bbox_inches='tight')
 		
@@ -341,24 +368,24 @@ if __name__ == '__main__':
 	plotSuccessP("maze4","maze4_success.pdf")
 	plotSuccessP("liuB2","liuB2_success.pdf")
 	
-	plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
-	plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
-	plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
-	plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_h.pdf",figNameD="liuB2_distanceL_h.pdf",order="DESC")
-	plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_l.pdf",figNameD="liuB2_distanceL_l.pdf",order="ASC")
+	#plotTimeAndDistanceP("maze3","maze3_time.pdf","maze3_distance.pdf")
+	#plotTimeAndDistanceP("maze4","maze4_time.pdf","maze4_distance.pdf")
+	#plotTimeAndDistanceP("liuB2","liuB2_time.pdf","liuB2_distance.pdf")
+	#plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_h.pdf",figNameD="liuB2_distanceL_h.pdf",order="DESC")
+	#plotTimeAndDistancePLimit(map_name="liuB2",figNameT="liuB2_timeL_l.pdf",figNameD="liuB2_distanceL_l.pdf",order="ASC")
 	
 	#plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_h.pdf",figNameD="maze3_distanceL_h.pdf",order="DESC")
 	#plotTimeAndDistancePLimit(map_name="maze3",figNameT="maze3_timeL_l.pdf",figNameD="maze3_distanceL_l.pdf",order="ASC")
 
 	
-	plotTimeAndDistanceD("maze3","maze3_timeD.pdf","maze3_distanceD.pdf")
-	plotTimeAndDistanceD("maze4","maze4_timeD.pdf","maze4_distanceD.pdf")
-	plotTimeAndDistanceD("liuB2","liuB2_timeD.pdf","liuB2_distanceD.pdf")
-	plotHist("liuB2")
-	plotTimeAndDistanceLine("liuB2")
-	plotTimeScatter("liuB2")
-	plotTimeScatter("maze3")
-	plotTimeAndDistanceLine("maze3")
+	#plotTimeAndDistanceD("maze3","maze3_timeD.pdf","maze3_distanceD.pdf")
+	#plotTimeAndDistanceD("maze4","maze4_timeD.pdf","maze4_distanceD.pdf")
+	#plotTimeAndDistanceD("liuB2","liuB2_timeD.pdf","liuB2_distanceD.pdf")
+	#plotHist("liuB2")
+	#plotTimeAndDistanceLine("liuB2")
+	#plotTimeScatter("liuB2")
+	#plotTimeScatter("maze3")
+	#plotTimeAndDistanceLine("maze3")
 	pylab.show()
 	
 	
